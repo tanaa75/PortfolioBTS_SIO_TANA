@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu de Mémoire - Aperçu Authentique (Tkinter)</title>
+    <style>
+        body { background-color: #f0f0f0; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .window-frame { background: #f0f0f0; border: 2px solid #808080; width: 800px; padding: 20px; box-shadow: 4px 4px 10px rgba(0,0,0,0.2); position: relative; }
+        
+        .header-title { font-family: 'Arial', sans-serif; font-size: 26pt; font-weight: bold; color: #00008b; text-align: center; margin-bottom: 20px; }
+        .theme-label { font-family: 'Arial', sans-serif; font-size: 15pt; color: #800080; text-align: center; margin-bottom: 20px; }
+        
+        .stats-container { display: flex; justify-content: center; gap: 60px; margin-bottom: 20px; }
+        .stat-box { text-align: center; }
+        .stat-title-current { font-weight: bold; color: #006400; font-size: 14pt; margin-bottom: 5px; }
+        .stat-title-record { font-weight: bold; color: #8b0000; font-size: 14pt; margin-bottom: 5px; }
+        .stat-text { font-size: 13pt; }
+        
+        .separator { height: 2px; background: #808080; width: 90%; margin: 20px auto; }
+        
+        .game-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: fit-content; margin: 30px auto; }
+        .tk-button {
+            width: 130px;
+            height: 90px;
+            background-color: #d3d3d3; /* lightgray */
+            border: 2px solid #808080;
+            font-size: 22pt;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .tk-button:active { background-color: #a9a9a9; }
+        .tk-button.flipped { background-color: #add8e6; color: #00008b; }
+        .tk-button.matched { background-color: #90ee90; color: #006400; }
+        
+        .footer-controls { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+        .control-btn { padding: 10px 15px; border: 1px solid #808080; font-size: 13pt; cursor: pointer; }
+        .btn-restart { background-color: #add8e6; }
+        .btn-reset { background-color: #ffa500; }
+        .btn-menu { background-color: #90ee90; }
+        .btn-sound { background-color: #ffff00; font-size: 12pt; }
+        .btn-help { background-color: #ffc0cb; font-size: 12pt; }
+        
+        .back-portfolio { position: absolute; top: 10px; left: 10px; text-decoration: none; color: #000; font-size: 0.8em; border: 1px solid #ccc; padding: 5px; background: #eee; }
+    </style>
+</head>
+<body>
+
+<div class="window-frame">
+    <a href="javascript:history.back()" class="back-portfolio">← Retour Portfolio</a>
+
+    <div class="header-title">JEU DE MÉMOIRE - NORMAL</div>
+    <div class="theme-label" id="current-theme">Thème: Fruits</div>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <div class="stat-title-current">PARTIE ACTUELLE</div>
+            <div class="stat-text" id="moves">Coups: 0</div>
+            <div class="stat-text" id="timer">Temps: 0s</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-title-record">RECORDS NORMAL</div>
+            <div class="stat-text">Moins de coups: 12</div>
+            <div class="stat-text">Meilleur temps: 45s</div>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="game-grid" id="game-grid">
+        <!-- Généré par JS -->
+    </div>
+
+    <div class="footer-controls">
+        <button class="control-btn btn-restart" onclick="initGame()">🔄 Recommencer</button>
+        <button class="control-btn btn-reset">🏆 Reset Records</button>
+        <button class="control-btn btn-menu">🏠 Menu Principal</button>
+        <button class="control-btn btn-sound">🔊 Sons ON</button>
+        <button class="control-btn btn-help" onclick="revealHelp()">💡 Aide</button>
+    </div>
+</div>
+
+<script>
+    const themes = {
+        Fruits: ["🍎", "🍌", "🍊", "🍇", "🍓", "🥝", "🍑", "🍒"],
+        Sports: ["⚽", "🏀", "🏈", "⚾", "🎾", "🏐", "🏓", "🏸"],
+        Chiffres: ["1", "2", "3", "4", "5", "6", "7", "8"]
+    };
+
+    let activeTheme = "Fruits";
+    let cards = [];
+    let flipped = [];
+    let matched = 0;
+    let moves = 0;
+    let seconds = 0;
+    let timer;
+
+    function initGame() {
+        const grid = document.getElementById('game-grid');
+        grid.innerHTML = '';
+        cards = [...themes[activeTheme], ...themes[activeTheme]];
+        cards.sort(() => Math.random() - 0.5);
+        
+        matched = 0;
+        moves = 0;
+        seconds = 0;
+        flipped = [];
+        document.getElementById('moves').innerText = "Coups: 0";
+        document.getElementById('timer').innerText = "Temps: 0s";
+        clearInterval(timer);
+        timer = setInterval(() => {
+            seconds++;
+            document.getElementById('timer').innerText = `Temps: ${seconds}s`;
+        }, 1000);
+
+        cards.forEach((val, i) => {
+            const btn = document.createElement('div');
+            btn.className = 'tk-button';
+            btn.innerText = '?';
+            btn.onclick = () => onCardClick(btn, val, i);
+            grid.appendChild(btn);
+        });
+    }
+
+    function onCardClick(btn, val, index) {
+        if (flipped.length >= 2 || btn.classList.contains('flipped') || btn.classList.contains('matched')) return;
+
+        btn.classList.add('flipped');
+        btn.innerText = val;
+        flipped.push({btn, val});
+
+        if (flipped.length === 2) {
+            moves++;
+            document.getElementById('moves').innerText = `Coups: ${moves}`;
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        const [c1, c2] = flipped;
+        if (c1.val === c2.val) {
+            c1.btn.classList.replace('flipped', 'matched');
+            c2.btn.classList.replace('flipped', 'matched');
+            matched++;
+            flipped = [];
+            if (matched === 8) {
+                clearInterval(timer);
+                alert(`Victoire en ${moves} coups et ${seconds} secondes !`);
+            }
+        } else {
+            setTimeout(() => {
+                c1.btn.classList.remove('flipped');
+                c2.btn.classList.remove('flipped');
+                c1.btn.innerText = '?';
+                c2.btn.innerText = '?';
+                flipped = [];
+            }, 1000);
+        }
+    }
+
+    function revealHelp() {
+        const unflipped = Array.from(document.querySelectorAll('.tk-button:not(.matched):not(.flipped)'));
+        if (unflipped.length < 2) return;
+        const randomCards = unflipped.sort(() => 0.5 - Math.random()).slice(0, 2);
+        
+        randomCards.forEach(c => {
+            const originalVal = cards[Array.from(c.parentNode.children).indexOf(c)];
+            c.classList.add('flipped');
+            c.innerText = originalVal;
+            setTimeout(() => {
+                if (!c.classList.contains('matched')) {
+                    c.classList.remove('flipped');
+                    c.innerText = '?';
+                }
+            }, 1500);
+        });
+    }
+
+    initGame();
+</script>
+
+</body>
+</html>

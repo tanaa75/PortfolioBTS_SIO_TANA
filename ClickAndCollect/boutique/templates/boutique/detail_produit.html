@@ -1,0 +1,78 @@
+{% extends "boutique/base.html" %}
+
+{% block content %}
+<div style="display: flex; gap: 40px; margin-top: 30px; align-items: flex-start; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 300px;">
+        <img src="{{ produit.image.url }}" alt="{{ produit.nom }}"
+             style="width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    </div>
+
+    <div style="flex: 1; min-width: 300px;">
+        <h1 style="margin-top: 0;">{{ produit.nom }}</h1>
+        <p style="font-size: 1.8em; color: #28a745; font-weight: bold; margin-bottom: 10px;">{{ produit.prix }} €</p>
+
+        <div style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 10px; border-left: 5px solid #333;">
+            <h3 style="margin-top: 0;">Description</h3>
+            <p style="color: #555; line-height: 1.5;">{{ produit.description }}</p>
+        </div>
+
+        <form action="{% url 'ajouter_au_panier' produit.id %}" method="POST" id="add-to-cart-form">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 25px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 15px; font-size: 1.1em;">
+                    👟 Choisir votre pointure :
+                </label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 10px;">
+                    {% for taille in tailles %}
+                    <div class="taille-option"
+                         onclick="selectSize(this, '{{ taille }}')"
+                         style="border: 1px solid #ccc; padding: 12px 5px; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-weight: bold; background: white;">
+                        {{ taille }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <input type="hidden" name="taille" id="selected-size" value="">
+
+            <button type="submit" id="btn-submit" disabled
+                    style="width: 100%; background: #ccc; color: white; padding: 18px; border: none; border-radius: 10px; font-weight: bold; cursor: not-allowed; font-size: 1.1em; transition: background 0.3s;">
+                Veuillez sélectionner une taille
+            </button>
+        </form>
+
+        <a href="{% url 'liste_produits' %}" style="display: block; text-align: center; margin-top: 25px; color: #666; text-decoration: none; font-weight: 500;">
+            ← Retour au catalogue
+        </a>
+    </div>
+</div>
+
+<script>
+    function selectSize(element, size) {
+        // 1. Réinitialisation des styles de toutes les options
+        document.querySelectorAll('.taille-option').forEach(opt => {
+            opt.style.background = 'white';
+            opt.style.color = 'black';
+            opt.style.borderColor = '#ccc';
+            opt.style.transform = 'scale(1)';
+        });
+
+        // 2. Mise en avant de l'option sélectionnée
+        element.style.background = '#333';
+        element.style.color = 'white';
+        element.style.borderColor = '#333';
+        element.style.transform = 'scale(1.05)';
+
+        // 3. Mise à jour de la valeur pour Django
+        document.getElementById('selected-size').value = size;
+
+        // 4. Activation et mise à jour du bouton de validation
+        const btn = document.getElementById('btn-submit');
+        btn.disabled = false;
+        btn.style.background = '#28a745'; // Vert succès
+        btn.style.cursor = 'pointer';
+        btn.innerHTML = "🛒 Ajouter la taille <strong>" + size + "</strong> au panier";
+    }
+</script>
+{% endblock %}

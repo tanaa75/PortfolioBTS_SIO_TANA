@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualiseur d'Algorithmes de Tri</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> Retour au Portfolio</a>
+        
+        <div class="app-card">
+            <div class="header">
+                <i class="fas fa-sort-amount-up-alt icon-primary"></i>
+                <h1>Tri Bulles & Sélection</h1>
+                <p>Simulation visuelle des algorithmes enseignés en Java (Tableaux et Vecteurs)</p>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="arraySize">Taille du tableau : <span id="sizeValue">15</span></label>
+                    <input type="range" id="arraySize" min="5" max="30" value="15" oninput="updateSizeUI(this.value)">
+                </div>
+                
+                <button onclick="genererTableau()" class="btn-action btn-secondary">
+                    <i class="fas fa-random"></i> Nouveau Tableau
+                </button>
+            </div>
+
+            <div class="sort-actions">
+                <button onclick="lancerTriBulles()" id="btn-bulles" class="btn-action btn-primary">
+                    <i class="fas fa-water"></i> Tri à Bulles
+                </button>
+                <button onclick="lancerTriSelection()" id="btn-selection" class="btn-action btn-primary">
+                    <i class="fas fa-hand-pointer"></i> Tri par Sélection
+                </button>
+            </div>
+
+            <div class="visualization-area">
+                <div id="array-container" class="array-container">
+                    <!-- Les barres seront générées ici par JavaScript -->
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3 id="algo-name">En attente</h3>
+                <p id="algo-desc">Générez un tableau et lancez un tri pour voir l'algorithme en action.</p>
+                <div class="stats">
+                    <span>Comparaisons: <b id="comp-count">0</b></span>
+                    <span>Échanges: <b id="swap-count">0</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagerie | Admin - Aujourd'hui vers Demain</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- On utilise le CSS original du projet -->
+    <link rel="stylesheet" href="../../Stage2_Association_PHP/assets/css/admin.css">
+    <link rel="stylesheet" href="../../Stage2_Association_PHP/assets/css/mobile-responsive.css">
+    <style>
+        .back-to-portfolio {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 9999;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-body-tertiary">
+    
+    <a href="../../index.html" class="back-to-portfolio">← Retour au Portfolio</a>
+
+    <!-- NAVBAR ORIGINALE (Portage HTML) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain
+        </a>
+        <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle btn btn-warning text-dark px-3 rounded-pill fw-bold shadow-sm" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear-fill me-1"></i>ADMIN
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item" href="admin.html"><i class="bi bi-calendar-event me-2"></i>Gérer événements</a></li>
+                    <li><a class="dropdown-item fw-bold" href="messages.html"><i class="bi bi-inbox-fill me-2"></i>Messagerie</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold"><i class="bi bi-inbox-fill text-primary"></i> Boîte de réception</h2>
+            <span class="badge bg-primary rounded-pill fs-6">3 messages</span>
+        </div>
+
+        <div class="row">
+            <!-- MESSAGE 1: BÉNÉVOLAT (FAUX MESSAGE DEMANDÉ) -->
+            <div class="col-12 mb-4">
+                <div class="card card-message shadow-sm type-benevole border-danger">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box bg-danger text-white shadow">
+                                    <i class="bi bi-heart-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Mme Dupont Martine</h5>
+                                    <div class="text-muted small">
+                                        <i class="bi bi-clock"></i> 09/04/2026 à 14:22 &bull; 
+                                        <span><i class="bi bi-envelope-at"></i> martine.dupont@email.fr</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash"></i></button>
+                        </div>
+                        <hr class="my-3 opacity-10">
+                        <div class="message-content p-3 rounded-3 mb-3 bg-light">
+                            <pre class="mb-0" style="font-family: inherit; white-space: pre-wrap;">❤️ NOUVEAU BÉNÉVOLE !
+
+Nom : Mme Dupont Martine
+Email : martine.dupont@email.fr
+Téléphone : 06 12 34 56 78
+
+Dispos : Tous les mardis après-midi
+Aime faire : Aide aux devoirs, sorties culturelles
+
+📄 TÉLÉCHARGER LE CV : simulation_cv_dupont.pdf</pre>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary btn-sm px-3 rounded-pill"><i class="bi bi-reply-fill"></i> Répondre</button>
+                            <button class="btn btn-success btn-sm px-3 rounded-pill"><i class="bi bi-telephone-fill"></i> Appeler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MESSAGE 2: AIDE AUX DEVOIRS (FAUX MESSAGE DEMANDÉ) -->
+            <div class="col-12 mb-4">
+                <div class="card card-message shadow-sm type-devoirs border-warning">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box bg-warning text-white shadow">
+                                    <i class="bi bi-book-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">M. Kebdi Yassine</h5>
+                                    <div class="text-muted small">
+                                        <i class="bi bi-clock"></i> 08/04/2026 à 10:45 &bull; 
+                                        <span><i class="bi bi-envelope-at"></i> yassine.k@bbox.fr</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash"></i></button>
+                        </div>
+                        <hr class="my-3 opacity-10">
+                        <div class="message-content p-3 rounded-3 mb-3 bg-light">
+                            <pre class="mb-0" style="font-family: inherit; white-space: pre-wrap;">🔔 INSCRIPTION AIDE AUX DEVOIRS
+
+Enfant : Kebdi Ryad
+Classe : CM2
+Adresse : 45 rue de la Liberté, Noisy
+Téléphone : 01 48 55 00 00
+Email parent : yassine.k@bbox.fr</pre>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary btn-sm px-3 rounded-pill"><i class="bi bi-reply-fill"></i> Répondre</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0 small">© 2026 Association Aujourd'hui vers Demain - Espace Admin</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

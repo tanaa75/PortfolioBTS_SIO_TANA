@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma Boutique - Click & Collect (Aperçu Authentique)</title>
+    <!-- On utilise les mêmes styles que dans base.html du projet original -->
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
+        .navbar { background: #343a40; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .navbar a { color: white; text-decoration: none; margin-right: 20px; font-weight: 500; }
+        .navbar a:hover { color: #ffc107; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); min-height: 60vh; }
+        
+        .catalogue { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin-top: 20px; }
+        .produit-card {
+            border: 1px solid #efefef;
+            padding: 20px;
+            width: 280px;
+            border-radius: 12px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .produit-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .produit-card img { width: 100%; height: 220px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
+        
+        .btn-details {
+            display: inline-block;
+            background: #343a40;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-weight: bold;
+            width: 80%;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-details:hover { background: #000; }
+        
+        .back-portfolio {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: #343a40;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.8em;
+            z-index: 1000;
+        }
+
+        /* Panier Modal */
+        #panier-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; }
+        .panier-modal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; width: 450px; }
+        .panier-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .btn-valider { background: #28a745; color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        
+        .code-reveal { text-align: center; display: none; }
+        .code-box { font-size: 2em; letter-spacing: 5px; padding: 20px; border: 2px dashed #343a40; font-family: monospace; margin: 20px 0; background: #fff9e6; }
+    </style>
+</head>
+<body>
+
+<a href="javascript:history.back()" class="back-portfolio">← Retour Portfolio</a>
+
+<nav class="navbar">
+    <div>
+        <a href="#" style="font-size: 1.2em; font-weight: bold;">👟 Ma Boutique</a>
+        <a href="#">Catalogue</a>
+        <a href="javascript:void(0)" onclick="openPanier()">🛒 Panier (<span id="panier-count">0</span>)</a>
+    </div>
+    <div>
+        <span>👤 Visiteur</span>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 style="text-align: center; margin-bottom: 5px;">Nos Baskets Disponibles</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Aperçu interactif de l'interface du projet Django</p>
+
+    <div class="catalogue" id="produit-list">
+        <!-- Produits injectés via JS en respectant le format HTML original -->
+    </div>
+</div>
+
+<div id="panier-overlay">
+    <div class="panier-modal">
+        <h3>Votre Panier</h3>
+        <div id="panier-content"></div>
+        <div style="font-weight: bold; font-size: 1.2em; text-align: right; margin-top: 20px;">Total : <span id="total-val">0</span> €</div>
+        <button class="btn-valider" onclick="validerCommande()">Passer la commande</button>
+        <button onclick="closePanier()" style="margin-top: 10px; background: none; border: none; text-decoration: underline; cursor: pointer;">Continuer vos achats</button>
+        
+        <div class="code-reveal" id="code-reveal">
+            <h3 style="color: #28a745;">Commande réussie !</h3>
+            <p>Voici votre code de retrait unique :</p>
+            <div class="code-box" id="final-code"></div>
+            <button onclick="location.reload()" class="btn-details">Terminer</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ces données sont tirées de votre dossier media/produits
+    const produits = [
+        { id: 1, nom: "Air Force 1 '07", prix: 119.99, stock: 5, img: "../../ClickAndCollect/media/produits/AIRFORCE107.avif" },
+        { id: 2, nom: "Air Force 1 '07 Black", prix: 119.99, stock: 3, img: "../../ClickAndCollect/media/produits/AIRFORCE107_Black.avif" },
+        { id: 3, nom: "Asics Gel-1130", prix: 110.00, stock: 8, img: "../../ClickAndCollect/media/produits/asics-gel-1130-whitecloudgrey.webp" },
+        { id: 4, nom: "Nike Dunk Low", prix: 125.00, stock: 0, img: "../../ClickAndCollect/media/produits/jd_147939_a.jpg" }
+    ];
+
+    let panier = [];
+
+    function init() {
+        const list = document.getElementById('produit-list');
+        produits.forEach(p => {
+            const article = document.createElement('article');
+            article.className = 'produit-card';
+            article.innerHTML = `
+                <img src="${p.img}" alt="${p.nom}">
+                <h3>${p.nom}</h3>
+                <p style="font-size: 1.2em; color: #28a745; font-weight: bold; margin: 5px 0;">${p.prix} €</p>
+                <p><small style="color: #666;">Stock : ${p.stock > 0 ? p.stock + ' paires' : 'Rupture'}</small></p>
+                ${p.stock > 0 
+                  ? `<button class="btn-details" onclick="ajouterAuPanier(${p.id})">Ajouter au panier</button>`
+                  : `<p style="color: #d9534f; font-weight: bold; margin-top: 10px;">Rupture de stock</p>`}
+            `;
+            list.appendChild(article);
+        });
+    }
+
+    function ajouterAuPanier(id) {
+        const p = produits.find(item => item.id === id);
+        panier.push(p);
+        document.getElementById('panier-count').innerText = panier.length;
+        alert(`${p.nom} ajouté au panier !`);
+    }
+
+    function openPanier() {
+        const overlay = document.getElementById('panier-overlay');
+        const content = document.getElementById('panier-content');
+        const totalVal = document.getElementById('total-val');
+        
+        content.innerHTML = '';
+        let total = 0;
+        
+        if (panier.length === 0) {
+            content.innerHTML = '<p>Votre panier est vide.</p>';
+        } else {
+            panier.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'panier-item';
+                div.innerHTML = `<span>${item.nom}</span> <span>${item.prix} €</span>`;
+                content.appendChild(div);
+                total += item.prix;
+            });
+        }
+        
+        totalVal.innerText = total.toFixed(2);
+        overlay.style.display = 'block';
+    }
+
+    function closePanier() {
+        document.getElementById('panier-overlay').style.display = 'none';
+    }
+
+    function validerCommande() {
+        if (panier.length === 0) return;
+        
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let code = '';
+        for (let i = 0; i < 10; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        document.getElementById('panier-content').style.display = 'none';
+        document.getElementById('total-val').parentElement.style.display = 'none';
+        document.querySelector('.btn-valider').style.display = 'none';
+        
+        document.getElementById('final-code').innerText = code;
+        document.getElementById('code-reveal').style.display = 'block';
+    }
+
+    init();
+</script>
+
+</body>
+</html>

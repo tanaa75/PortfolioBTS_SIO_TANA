@@ -1,0 +1,174 @@
+/**
+ * ===========================================
+ * STYLES PAGE BÉNÉVOLAT - AUJOURD'HUI VERS DEMAIN
+ * ===========================================
+ * 
+ * Styles pour la page de candidature bénévole
+ */
+
+/* ===========================================
+   BASE
+   =========================================== */
+body {
+    transition: background-color 0.5s;
+}
+
+/* ===========================================
+   SECTION BÉNÉVOLAT - FOND
+   =========================================== */
+.benevolat-section {
+    background: var(--bs-body-bg);
+}
+
+.benevolat-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    background-image: radial-gradient(circle at 20% 50%, rgba(13, 110, 253, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.15) 0%, transparent 50%);
+}
+
+/* ===========================================
+   CARTES BESOINS
+   =========================================== */
+.need-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.need-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+.need-card .rounded-circle {
+    transition: transform 0.3s ease;
+}
+
+.need-card:hover .rounded-circle {
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* ===========================================
+   CARTE FORMULAIRE
+   =========================================== */
+.volunteer-form-card {
+    transition: transform 0.3s ease;
+}
+
+.volunteer-form-card:hover {
+    transform: translateY(-5px);
+}
+
+.volunteer-form-card .card-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.volunteer-form-card .card-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-30%, -30%) rotate(180deg);
+    }
+}
+
+/* ===========================================
+   MODE CLAIR
+   =========================================== */
+[data-bs-theme="light"] .benevolat-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+[data-bs-theme="light"] .benevolat-text {
+    color: #6c757d !important;
+}
+
+[data-bs-theme="light"] .benevolat-alert {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+[data-bs-theme="light"] .benevolat-alert-text {
+    color: #6c757d !important;
+}
+
+[data-bs-theme="light"] .need-card {
+    background-color: #ffffff !important;
+    color: #212529;
+}
+
+[data-bs-theme="light"] .need-card-text {
+    color: #6c757d !important;
+}
+
+[data-bs-theme="light"] .benevolat-footer-text {
+    color: #6c757d !important;
+}
+
+[data-bs-theme="light"] .form-header-title,
+[data-bs-theme="light"] .form-header-subtitle {
+    color: #212529 !important;
+}
+
+/* ===========================================
+   MODE SOMBRE
+   =========================================== */
+[data-bs-theme="dark"] .benevolat-section {
+    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+}
+
+[data-bs-theme="dark"] .benevolat-text {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .benevolat-alert {
+    background-color: rgba(13, 110, 253, 0.15);
+    color: #f8f9fa;
+    border-color: #0d6efd !important;
+}
+
+[data-bs-theme="dark"] .benevolat-alert-text {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .need-card {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #f8f9fa;
+    backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="dark"] .need-card:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .need-card-text {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .benevolat-footer-text {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .form-header-title,
+[data-bs-theme="dark"] .form-header-subtitle {
+    color: #ffffff !important;
+}

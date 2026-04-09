@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #00f3ff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+}
+
+header#store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 20, 35, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.logo i {
+    color: #00f3ff;
+    font-size: 1.5rem;
+}
+
+.cart-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 243, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cart-summary:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+.app-card {
+    background: rgba(10, 20, 35, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2.5rem;
+}
+
+.shop-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.shop-hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.shop-hero p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 243, 255, 0.4);
+}
+
+.product-img {
+    height: 140px;
+    background: #1a2a44;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #00f3ff;
+}
+
+.product-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: #fff;
+}
+
+.product-info .price {
+    color: #00f3ff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.btn-add {
+    width: 100%;
+    padding: 0.7rem;
+    background: #0066ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-add:hover {
+    background: #0052cc;
+}
+
+/* Side Panel */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: #0a1423;
+    z-index: 100;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.side-panel.hidden {
+    transform: translateX(100%);
+}
+
+.panel-header {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cart-item .qty {
+    width: 25px;
+    height: 25px;
+    background: #00f3ff;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.panel-footer {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.panel-footer .total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 1rem;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-checkout:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    background: #0b1a2e;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid #00f3ff;
+    text-align: center;
+    max-width: 450px;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #00ff88;
+    margin-bottom: 1.5rem;
+}
+
+.retrait-code {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 243, 255, 0.1);
+    border: 2px dashed #00f3ff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    color: #00f3ff;
+}
+
+.small {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.btn-action {
+    background: #0066ff;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .side-panel { width: 100%; }
+}

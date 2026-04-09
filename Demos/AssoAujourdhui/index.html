@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aujourd'hui vers Demain - Association de quartier à Noisy-le-Sec. Aide aux devoirs, animations locales et bénévolat pour construire ensemble l'avenir de nos quartiers.">
+    <meta name="keywords" content="association, Noisy-le-Sec, aide aux devoirs, bénévolat, quartier, solidarité, enfants, soutien scolaire">
+    <meta name="author" content="Aujourd'hui vers Demain">
+    <title>Aujourd'hui vers Demain | Association de quartier à Noisy-le-Sec</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/mobile-responsive.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png">
+    <style>
+        .back-to-portfolio {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+        .back-to-portfolio:hover { background: #0066ff; color: white; transform: scale(1.05); }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <a href="../../index.html" class="back-to-portfolio">← Retour au Portfolio</a>
+
+    <!-- NAVBAR IDENTIQUE -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-0 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi bi-house-fill me-1"></i>Accueil</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/actions.html"><i class="bi bi-book-fill me-1"></i>Nos Actions</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/benevolat.html"><i class="bi bi-people-fill me-1"></i>Bénévolat</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/galerie.html"><i class="bi bi-camera-fill me-1"></i>Galerie</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/contact.html"><i class="bi bi-envelope-fill me-1"></i>Contact</a></li>
+            <li class="nav-item ms-2">
+                <a class="btn btn-outline-light rounded-pill px-4 fw-bold" href="auth/connexion.html">Se connecter</a>
+            </li>
+            <li class="nav-item ms-2">
+                <button class="btn btn-outline-light rounded-circle" onclick="toggleTheme()" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- BANNIÈRE HERO -->
+    <div class="hero-banner text-center" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-attachment: fixed; padding: 120px 0;">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-white mb-3" data-aos="fade-down">Construire demain, dès aujourd'hui.</h1>
+            <p class="lead text-white mb-4 opacity-75" data-aos="fade-in">Au cœur de Noisy-le-Sec, pour l'avenir de nos quartiers.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" data-aos="zoom-in">
+                <a href="#actions" class="btn btn-warning btn-lg rounded-pill shadow fw-bold"><i class="bi bi-book-fill me-2"></i>Aide aux devoirs</a>
+                <a href="pages/benevolat.html" class="btn btn-outline-light btn-lg rounded-pill"><i class="bi bi-people-fill me-2"></i>Devenir Bénévole</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATISTIQUES -->
+    <div class="bg-warning text-dark py-4 text-center fw-bold shadow position-relative overflow-hidden">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="p-3 bg-white bg-opacity-25 rounded-3">
+                        <i class="bi bi-people-fill fs-1"></i>
+                        <h2 class="display-6 fw-bold">15+</h2>
+                        <p class="text-uppercase mb-0">Bénévoles</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="p-3 bg-white bg-opacity-25 rounded-3">
+                        <i class="bi bi-person-hearts fs-1"></i>
+                        <h2 class="display-6 fw-bold">50+</h2>
+                        <p class="text-uppercase mb-0">Enfants</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="p-3 bg-white bg-opacity-25 rounded-3">
+                        <i class="bi bi-bullseye fs-1"></i>
+                        <h2 class="display-6 fw-bold">2020</h2>
+                        <p class="text-uppercase mb-0">Création</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRÉSENTATION -->
+    <div class="container py-5 my-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="fw-bold text-primary mb-4">Qui sommes-nous ?</h2>
+                <p class="lead text-muted">Plus qu'une simple association, <strong>Aujourd'hui vers Demain</strong> est le fruit d'une solidarité entre voisins. Tout a commencé en 2020, dans les quartiers Langevin et La Boissière...</p>
+                <p>Nous sommes des habitants, des parents et des jeunes qui avons décidé de nous bouger pour notre ville. Notre but ? Que chacun trouve sa place, que ce soit par le soutien scolaire pour les plus jeunes ou l'organisation de moments festifs pour tous.</p>
+            </div>
+            <div class="col-lg-6" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Enfants" class="img-fluid rounded-4 shadow-lg">
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions-section py-5 bg-light" id="actions">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h2 class="display-5 fw-bold mb-3">L'Aide aux Devoirs</h2>
+                <p class="lead">Accompagner chaque enfant vers la réussite</p>
+            </div>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="bg-white p-4 rounded-4 shadow-lg">
+                        <h3 class="fw-bold mb-3 text-primary">Notre Mission</h3>
+                        <p>Dans une ambiance calme, nos bénévoles prennent le temps d'expliquer, de réviser les bases et surtout d'apprendre à s'organiser.</p>
+                        <div class="row g-3 mt-3">
+                            <div class="col-md-6"><div class="p-3 rounded-3 border bg-light"><strong>Lun, Mar, Jeu, Ven</strong></div></div>
+                            <div class="col-md-6"><div class="p-3 rounded-3 border bg-light"><strong>16h30 - 18h00</strong></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-primary shadow rounded-4">
+                        <div class="card-header bg-primary text-white text-center py-3"><h5 class="mb-0">Inscrire mon enfant</h5></div>
+                        <div class="card-body p-4">
+                            <div class="alert alert-info py-2 small"><i class="bi bi-info-circle me-1"></i>Connectez-vous pour accéder au formulaire complet.</div>
+                            <form onsubmit="event.preventDefault(); alert('Ceci est une simulation. Connectez-vous pour valider.');">
+                                <div class="row mb-3">
+                                    <div class="col-6"><input type="text" class="form-control" placeholder="Nom enfant" required disabled></div>
+                                    <div class="col-6"><input type="text" class="form-control" placeholder="Prénom" required disabled></div>
+                                </div>
+                                <button class="btn btn-warning w-100 fw-bold disabled">Se connecter pour s'inscrire</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÉVÉNEMENTS (DANS INDEX.PHP) -->
+    <div class="container py-5" id="events">
+        <h2 class="text-center mb-5 text-primary fw-bold">Nos Actualités</h2>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="card h-100 shadow border-0 card-event overflow-hidden rounded-4">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">01/09/2026</span>
+                        <h5 class="card-title fw-bold">Rentrée Scolaire & Fournitures</h5>
+                        <p class="small text-muted mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Salle Langevin</p>
+                        <p class="card-text">Distribution de kits scolaires pour tou les enfants inscrits à l'aide aux devoirs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 shadow border-0 card-event overflow-hidden rounded-4">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">15/06/2026</span>
+                        <h5 class="card-title fw-bold">Grande Fête de Quartier</h5>
+                        <p class="small text-muted mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Quartier La Boissière</p>
+                        <p class="card-text">Repas partagé, jeux gonflables et musique pour célébrer l'arrivée de l'été ensemble.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 shadow border-0 card-event overflow-hidden rounded-4">
+                    <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">20/05/2026</span>
+                        <h5 class="card-title fw-bold">Atelier Citoyen</h5>
+                        <p class="small text-muted mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Maison de quartier</p>
+                        <p class="card-text">Venez discuter des futurs projets de l'association pour améliorer notre cadre de vie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTIQUE -->
+    <footer class="bg-dark text-white pt-5 mt-auto">
+        <div class="container pb-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="fw-bold mb-4">Aujourd'hui vers Demain</h4>
+                    <p class="opacity-75">Notre mission est de renforcer les liens sociaux et d'apporter une aide concrète aux habitants de Noisy-le-Sec.</p>
+                    <div class="d-flex gap-3 mt-4 fs-4">
+                        <i class="bi bi-facebook"></i><i class="bi bi-instagram"></i><i class="bi bi-linkedin"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h5 class="fw-bold mb-4 text-warning">Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Accueil</a></li>
+                        <li class="mb-2"><a href="pages/actions.html" class="text-white text-decoration-none">Nos Actions</a></li>
+                        <li class="mb-2"><a href="pages/benevolat.html" class="text-white text-decoration-none">Devenir Bénévole</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4">Nous Contacter</h5>
+                    <p class="mb-1"><i class="bi bi-geo-alt-fill text-warning me-2"></i>116 rue de l'Avenir, 93130 Noisy-le-Sec</p>
+                    <p class="mb-1"><i class="bi bi-envelope-fill text-warning me-2"></i>contact@asso.fr</p>
+                    <p><i class="bi bi-telephone-fill text-warning me-2"></i>01 23 45 67 89</p>
+                </div>
+            </div>
+            <hr class="opacity-25 my-4">
+            <div class="text-center small opacity-50">
+                © 2026 Association Aujourd'hui vers Demain | <a href="pages/mentions_legales.html" class="text-white">Mentions Légales</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        function toggleTheme() {
+            const body = document.documentElement;
+            const current = body.getAttribute('data-bs-theme');
+            body.setAttribute('data-bs-theme', current === 'dark' ? 'light' : 'dark');
+        }
+    </script>
+</body>
+</html>

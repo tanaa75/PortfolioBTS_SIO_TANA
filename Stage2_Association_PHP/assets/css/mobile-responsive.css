@@ -1,0 +1,313 @@
+/**
+ * ===========================================
+ * CSS RESPONSIVE MOBILE
+ * ===========================================
+ * 
+ * Ce fichier contient les styles pour améliorer
+ * l'affichage du site sur mobile et tablette.
+ * 
+ * À inclure dans toutes les pages du site.
+ */
+
+/* ============================================
+   TABLEAUX RESPONSIVES (Admin)
+   ============================================ */
+
+/* Tableaux qui s'adaptent sur mobile */
+@media (max-width: 768px) {
+    /* Wrapper responsive pour tableaux */
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .table th, .table td {
+        padding: 0.5rem 0.4rem;
+        vertical-align: middle;
+    }
+    
+    /* Boutons dans tableaux */
+    .table .btn-sm {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Empêche débordement texte */
+    .table td {
+        word-break: break-word;
+        max-width: 150px;
+    }
+    
+    /* Cache certaines colonnes sur très petit écran */
+    @media (max-width: 480px) {
+        .hide-mobile {
+            display: none !important;
+        }
+    }
+}
+
+/* ============================================
+   NAVBAR MOBILE
+   ============================================ */
+
+@media (max-width: 991px) {
+    /* Menu déroulant plein écran sur mobile */
+    .navbar-collapse {
+        background: var(--bs-body-bg);
+        padding: 1rem;
+        margin-top: 0.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.25rem;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(0,0,0,0.05);
+    }
+    
+    [data-bs-theme="dark"] .navbar-nav .nav-link:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    
+    /* Dropdown admin sur mobile */
+    .navbar .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        box-shadow: none;
+        border: 1px solid rgba(0,0,0,0.1);
+        margin-top: 0.5rem;
+    }
+}
+
+/* ============================================
+   HERO SECTION MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem !important;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem !important;
+    }
+    
+    /* Boutons hero empilés */
+    .hero-section .btn-lg {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ============================================
+   CARTES ET GRILLES MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Cartes statistiques */
+    .stat-card {
+        padding: 15px !important;
+    }
+    
+    .stat-card h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Cartes photos galerie */
+    .photo-card img,
+    .photo-admin-card img {
+        height: 150px !important;
+    }
+    
+    /* Overlay visible sur mobile (pas de hover) */
+    .photo-overlay {
+        transform: translateY(0) !important;
+        padding: 30px 15px 15px !important;
+        font-size: 0.9rem;
+    }
+    
+    /* Badges visibles */
+    .photo-badge {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}
+
+/* ============================================
+   FORMULAIRES MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .form-control-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    /* Zone d'upload plus petite */
+    .upload-zone {
+        padding: 25px !important;
+    }
+    
+    .upload-zone i {
+        font-size: 2rem !important;
+    }
+}
+
+/* ============================================
+   FOOTER MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    footer .row > div {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    footer .footer-contact-icon {
+        margin: 0 auto 0.5rem !important;
+    }
+    
+    footer h5 {
+        margin-top: 1rem;
+    }
+    
+    /* Liens réseaux sociaux centrés */
+    footer .social-links {
+        justify-content: center !important;
+    }
+}
+
+/* ============================================
+   FILTRES ET BARRE MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .filter-bar {
+        top: 56px !important;
+        padding: 15px 0 !important;
+    }
+    
+    .filter-pills .btn {
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+        margin: 0 3px 8px 0 !important;
+    }
+    
+    .sort-select {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* ============================================
+   LIGHTBOX MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .lightbox img {
+        max-width: 95%;
+        max-height: 70vh;
+        border-radius: 8px;
+    }
+    
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        font-size: 1.8rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .lightbox-info {
+        bottom: 15px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .lightbox-info h4 {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   MODALS ET ALERTES MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .alert {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ============================================
+   ANIMATIONS RÉDUITES SUR MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Réduit les animations pour performance */
+    * {
+        transition-duration: 0.2s !important;
+    }
+    
+    /* Désactive certaines animations */
+    .hover-card:hover {
+        transform: none !important;
+    }
+}
+
+/* ============================================
+   UTILITAIRES RESPONSIVE
+   ============================================ */
+
+/* Cache sur mobile */
+@media (max-width: 576px) {
+    .d-xs-none {
+        display: none !important;
+    }
+}
+
+/* Cache sur tablette */
+@media (max-width: 768px) {
+    .d-sm-none {
+        display: none !important;
+    }
+}
+
+/* Texte plus petit sur mobile */
+@media (max-width: 576px) {
+    .text-xs-small {
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Marges réduites sur mobile */
+@media (max-width: 768px) {
+    .py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .mb-5 {
+        margin-bottom: 2rem !important;
+    }
+}

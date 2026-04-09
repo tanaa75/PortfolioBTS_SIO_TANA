@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Événements | Admin - Aujourd'hui vers Demain</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- On utilise le CSS original du projet -->
+    <link rel="stylesheet" href="../../Stage2_Association_PHP/assets/css/admin.css">
+    <link rel="stylesheet" href="../../Stage2_Association_PHP/assets/css/mobile-responsive.css">
+</head>
+<body class="bg-body-tertiary">
+    
+    <!-- NAVBAR ORIGINALE (Portage HTML) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain
+        </a>
+        <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle btn btn-warning text-dark px-3 rounded-pill fw-bold shadow-sm" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear-fill me-1"></i>ADMIN
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item fw-bold" href="admin.html"><i class="bi bi-calendar-event me-2"></i>Gérer événements</a></li>
+                    <li><a class="dropdown-item" href="messages.html"><i class="bi bi-inbox-fill me-2"></i>Messagerie</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="index.html">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="d-flex justify-content-between mb-4">
+            <h1>Gestion des Événements</h1>
+            <button class="btn btn-primary" onclick="alert('Simulation: Ouverture du formulaire d\'ajout');">+ Nouvel Événement</button>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover shadow rounded overflow-hidden bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ÉVÉNEMENTS RÉELS DU PROJET SIMULÉS -->
+                    <tr>
+                        <td class="fw-bold">Distribution de fournitures scolaires</td>
+                        <td>01/09/2026</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning btn-action"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-danger btn-action"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Fête de quartier Langevin</td>
+                        <td>15/06/2026</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning btn-action"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-danger btn-action"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Atelier d'aide aux devoirs - Rentrée</td>
+                        <td>10/09/2026</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning btn-action"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-danger btn-action"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0 small">© 2026 Association Aujourd'hui vers Demain - Panel Admin</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

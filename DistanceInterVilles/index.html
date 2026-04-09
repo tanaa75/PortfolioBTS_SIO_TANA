@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Inter-Villes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> Retour au Portfolio</a>
+        
+        <div class="app-card">
+            <div class="header">
+                <i class="fas fa-route icon-primary"></i>
+                <h1>Distance Inter-Villes</h1>
+                <p>Calculateur basé sur l'algorithme Java original (Matrices bidimensionnelles)</p>
+            </div>
+
+            <div class="form-group">
+                <div class="input-col">
+                    <label for="villeDepart"><i class="fas fa-map-marker-alt"></i> Ville de départ</label>
+                    <select id="villeDepart">
+                        <option value="" disabled selected>Choisir une ville...</option>
+                    </select>
+                </div>
+                
+                <div class="input-col">
+                    <label for="villeArrivee"><i class="fas fa-flag-checkered"></i> Ville d'arrivée</label>
+                    <select id="villeArrivee">
+                        <option value="" disabled selected>Choisir une ville...</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="calculerDistance()" class="btn-calculer">
+                Calculer la distance <i class="fas fa-calculator"></i>
+            </button>
+
+            <div id="resultat" class="result-box hidden">
+                <span class="distance-label">Distance :</span>
+                <span id="distance-value" class="distance-value"></span>
+                <span class="distance-unit">km</span>
+            </div>
+            
+            <div id="erreur" class="error-box hidden">
+                Veuillez sélectionner deux villes valides.
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+/**
+ * ===========================================
+ * STYLES PAGES LÉGALES - AUJOURD'HUI VERS DEMAIN
+ * ===========================================
+ * 
+ * Styles partagés pour mentions légales et confidentialité
+ */
+
+/* ===========================================
+   PAGE MENTIONS LÉGALES
+   =========================================== */
+.legal-page {
+    background: var(--bs-body-bg);
+    min-height: 100vh;
+}
+
+.legal-header {
+    position: relative;
+    padding: 60px 0 40px;
+    overflow: hidden;
+}
+
+.legal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    background-image: radial-gradient(circle at 20% 50%, rgba(13, 110, 253, 0.3) 0%, transparent 50%);
+}
+
+.legal-title {
+    position: relative;
+    z-index: 2;
+}
+
+.legal-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+}
+
+.legal-section {
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.legal-section:hover {
+    transform: translateY(-5px);
+}
+
+.legal-section-number {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.legal-section-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.legal-info-item {
+    padding: 12px 0;
+    border-bottom: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.legal-info-item:last-child {
+    border-bottom: none;
+}
+
+.legal-info-label {
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+/* ===========================================
+   PAGE CONFIDENTIALITÉ
+   =========================================== */
+.privacy-page {
+    background: var(--bs-body-bg);
+    min-height: 100vh;
+}
+
+.privacy-header {
+    position: relative;
+    padding: 60px 0 40px;
+    overflow: hidden;
+}
+
+.privacy-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    background-image: radial-gradient(circle at 80% 50%, rgba(25, 135, 84, 0.3) 0%, transparent 50%);
+}
+
+.privacy-title {
+    position: relative;
+    z-index: 2;
+}
+
+.privacy-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #198754, #157347);
+    color: white;
+    box-shadow: 0 8px 20px rgba(25, 135, 84, 0.3);
+}
+
+.privacy-section {
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.privacy-section:hover {
+    transform: translateY(-5px);
+}
+
+.privacy-section-number {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.privacy-section-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.privacy-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.privacy-list li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.privacy-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.privacy-alert {
+    padding: 15px 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    margin-top: 15px;
+}
+
+/* ===========================================
+   MODE CLAIR - MENTIONS LÉGALES
+   =========================================== */
+[data-bs-theme="light"] .legal-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+[data-bs-theme="light"] .legal-title {
+    color: #0d6efd;
+}
+
+[data-bs-theme="light"] .legal-subtitle {
+    color: #6c757d;
+}
+
+[data-bs-theme="light"] .legal-section {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="light"] .legal-section:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .legal-section-number {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: #ffffff;
+}
+
+[data-bs-theme="light"] .legal-section-title {
+    color: #212529;
+}
+
+[data-bs-theme="light"] .legal-section p {
+    color: #495057;
+}
+
+[data-bs-theme="light"] .legal-info-item {
+    border-color: #e9ecef;
+}
+
+[data-bs-theme="light"] .legal-info-label {
+    color: #0d6efd;
+}
+
+/* ===========================================
+   MODE SOMBRE - MENTIONS LÉGALES
+   =========================================== */
+[data-bs-theme="dark"] .legal-header {
+    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+}
+
+[data-bs-theme="dark"] .legal-title {
+    color: #ffc107;
+}
+
+[data-bs-theme="dark"] .legal-subtitle {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .legal-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] .legal-section:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-bs-theme="dark"] .legal-section-number {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #212529;
+}
+
+[data-bs-theme="dark"] .legal-section-title {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .legal-section p {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .legal-info-item {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .legal-info-label {
+    color: #ffc107;
+}
+
+/* ===========================================
+   MODE CLAIR - CONFIDENTIALITÉ
+   =========================================== */
+[data-bs-theme="light"] .privacy-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+[data-bs-theme="light"] .privacy-title {
+    color: #198754;
+}
+
+[data-bs-theme="light"] .privacy-subtitle {
+    color: #6c757d;
+}
+
+[data-bs-theme="light"] .privacy-section {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="light"] .privacy-section:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .privacy-section-number {
+    background: linear-gradient(135deg, #198754, #157347);
+    color: #ffffff;
+}
+
+[data-bs-theme="light"] .privacy-section-title {
+    color: #212529;
+}
+
+[data-bs-theme="light"] .privacy-section p {
+    color: #495057;
+}
+
+[data-bs-theme="light"] .privacy-list li::before {
+    color: #198754;
+}
+
+[data-bs-theme="light"] .privacy-alert {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+/* ===========================================
+   MODE SOMBRE - CONFIDENTIALITÉ
+   =========================================== */
+[data-bs-theme="dark"] .privacy-header {
+    background: linear-gradient(135deg, #1a1d20 0%, #2d3238 100%);
+}
+
+[data-bs-theme="dark"] .privacy-title {
+    color: #198754;
+}
+
+[data-bs-theme="dark"] .privacy-subtitle {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .privacy-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] .privacy-section:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-bs-theme="dark"] .privacy-section-number {
+    background: linear-gradient(135deg, #198754, #157347);
+    color: #ffffff;
+}
+
+[data-bs-theme="dark"] .privacy-section-title {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .privacy-section p {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .privacy-list li::before {
+    color: #198754;
+}
+
+[data-bs-theme="dark"] .privacy-alert {
+    background: rgba(255, 193, 7, 0.15);
+    border-color: #ffc107;
+    color: #ffc107;
+}

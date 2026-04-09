@@ -1,0 +1,51 @@
+{% extends "boutique/base.html" %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center; padding: 40px 20px;">
+
+    <div style="font-size: 50px; color: #28a745; margin-bottom: 20px;">✅</div>
+
+    <h1 style="color: #333;">Merci pour votre commande !</h1>
+    <p style="font-size: 1.1em; color: #666;">
+        Votre commande **n°{{ commande.id }}** a bien été enregistrée.
+    </p>
+
+    <div style="background: #fff3cd; border: 2px dashed #ffeeba; padding: 30px; border-radius: 10px; margin: 30px 0;">
+        <p style="margin: 0; font-weight: bold; color: #856404; text-transform: uppercase; letter-spacing: 1px;">
+            Votre Code de Retrait Unique
+        </p>
+        <h2 style="font-size: 3em; margin: 10px 0; color: #333; font-family: monospace; letter-spacing: 5px;">
+            {{ commande.code_retrait }}
+        </h2>
+        <p style="margin: 0; font-size: 0.9em; color: #856404;">
+            Présentez ce code au comptoir pour récupérer vos articles.
+        </p>
+    </div>
+
+    <div style="text-align: left; background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">Récapitulatif</h3>
+        <ul style="list-style: none; padding: 0;">
+            {% for ligne in commande.lignecommande_set.all %}
+            <li style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span>{{ ligne.quantite }}x {{ ligne.produit.nom }}</span>
+                <strong>{{ ligne.get_total }} €</strong>
+            </li>
+            {% endfor %}
+            <li style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 1.2em; border-top: 2px solid #ddd; padding-top: 10px;">
+                <strong>Total payé :</strong>
+                <strong style="color: #28a745;">{{ commande.get_cart_total }} €</strong>
+            </li>
+        </ul>
+    </div>
+
+    <div style="display: flex; gap: 15px; justify-content: center;">
+        <a href="{% url 'liste_produits' %}" style="text-decoration: none; color: #007bff; border: 1px solid #007bff; padding: 10px 20px; border-radius: 5px;">
+            Retourner à la boutique
+        </a>
+        <a href="{% url 'historique_commandes' %}" style="text-decoration: none; background: #007bff; color: white; padding: 10px 20px; border-radius: 5px;">
+            Voir mes commandes
+        </a>
+    </div>
+
+</div>
+{% endblock %}

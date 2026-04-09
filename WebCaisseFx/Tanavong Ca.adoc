@@ -1,0 +1,138 @@
+= Correction Personnalisée - TP Étude de Cas WebCaisse
+:author: Correction pour M. Ca Tanavong
+:toc: left
+:toc-title: Sommaire
+:icons: font
+
+Bonjour M. Ca Tanavong.
+
+Le travail fourni sur cette étude de cas et sur les questions de synthèse est d'un très bon niveau technique. Les concepts de modélisation, de bases de données, de sécurité et de programmation orientée objet sont compris et correctement appliqués. La mention d'un prototype fonctionnel sur GitHub est également un point positif.
+
+Cependant, comme pour l'ensemble des travaux de ce type, ces résultats écrits devront impérativement faire l'objet d'une validation orale avec M. Robert. Cette étape est stricte et nécessaire pour s'assurer de votre maîtrise réelle des concepts et vérifier que le travail n'est pas issu d'une génération par IA.
+
+Voici le détail factuel de la correction.
+
+
+== Mission 1 : Souscription en ligne et Sécurité
+
+=== Question 1.1 — Proposition de structure de base de données
+**Votre proposition :** Diagramme PlantUML incluant `Client`, `PointDeVente`, `Formule`, `ProgrammeFidelisation`, `Langue`, `Module` et `ActivationModule`.
+
+[NOTE]
+.Évaluation - Conforme et complet
+====
+Contrairement à beaucoup de modélisations, vous avez correctement identifié la nécessité de la table `Module` et de la classe d'association pour lier les points de vente, les modules et les langues. La structure est valide.
+====
+
+=== Question 1.2 — Faille de l'envoi de mot de passe
+**Votre réponse :** Identification de la faille de Confidentialité (DICP) et RGPD. Proposition d'un token temporaire et d'un hachage bcrypt.
+
+[NOTE]
+.Évaluation - Validé
+====
+L'analyse de la vulnérabilité est exacte et le processus de sécurisation proposé correspond aux standards de l'industrie.
+====
+
+=== Questions 1.3 et 1.4 — Historisation des formules
+**Votre réponse :** Diagnostic de l'écrasement par `UPDATE`. Création de la table `Historique_Formule` avec `date_debut_activation`.
+
+[NOTE]
+.Évaluation - Validé
+====
+Le problème de temporalité est bien identifié. L'ajout de la date dans la clé primaire composite est la bonne solution technique.
+====
+
+=== Question 1.5 — Trigger SQL
+**Votre réponse :** Déclencheur avec la condition `IF OLD.idFormule <> NEW.idFormule`.
+
+[WARNING]
+.Remarque - Table ciblée
+====
+La logique algorithmique conditionnelle est correcte. Attention toutefois à la table ciblée : votre déclencheur se déclenche sur `PointDeVente` alors que la modification de formule s'opère structurellement sur la table de liaison de souscription (ex: `FormuleSouscrite`).
+====
+
+== Mission 2 : Exploitation des données et Sécurité
+
+=== Question 2.1 — Requêtes SQL
+**Vos requêtes :**
+
+[WARNING]
+.Remarque - Oubli mineur dans la requête c
+====
+* **Requête a :** Correcte. L'usage de `DISTINCT` est pertinent.
+* **Requête b :** Correcte. L'utilisation de `TIMESTAMPDIFF` est la bonne méthode.
+* **Requête c :** Incomplète. La consigne exigeait l'affichage de l'adresse de courriel. Il manque l'attribut `c.mail` dans le `SELECT` et dans le `GROUP BY`.
+====
+
+=== Questions 2.2 et 2.3 — Faille de sécurité (OWASP) et PreparedStatement
+**Votre réponse :** Identification de l'Injection SQL par concaténation. Utilisation de `PreparedStatement` avec `setDate()`.
+
+
+[NOTE]
+.Évaluation - Conforme
+====
+La faille est bien expliquée. Le code Java est fonctionnel et la conversion des dates avec `java.sql.Date.valueOf()` est rigoureuse.
+Il manque la modification de la signature de la méthode qui doit prendre 3 paramètres (le seuil, la date de début et la date de fin)
+====
+
+=== Questions 2.4 et 2.5 — Tests unitaires (JUnit)
+**Votre réponse :** Assertions sur l'initialisation et sur les trois paliers d'achat (10, 30, 80).
+
+[NOTE]
+.Évaluation - Validé
+====
+Les tests couvrent correctement les règles de gestion métier et la syntaxe JUnit est respectée.
+====
+
+== Mission 3 : Statistiques de ventes (POO)
+
+=== Questions 3.1 à 3.3 — Javadoc, Méthodes et Constructeur
+**Votre réponse :** Javadoc rédigée, utilisation de `.size()` et appel à `super()`.
+
+[NOTE]
+.Évaluation - Conforme
+====
+Les implémentations sont exactes et respectent les concepts d'encapsulation et d'héritage.
+====
+
+=== Questions 3.4 et 3.5 — Polymorphisme et Robustesse
+**Votre réponse :** Utilisation de `instanceof` et gestion de la division par zéro avec `if (totalEcom == 0) return 0;`.
+
+[NOTE]
+.Évaluation - Validé
+====
+Le calcul métier est correct et la robustesse de la méthode est assurée.
+====
+
+=== Question 3.6 — Filtrage des ventes
+**Votre réponse :** Parcours de collection, condition de seuil et retour d'une nouvelle liste.
+
+[NOTE]
+.Évaluation - Validé
+====
+L'algorithme de filtrage est exact.
+====
+
+---
+
+== Partie 3 : Questions de synthèse (Java, SQL et Sécurité)
+
+**Vos réponses :** Traitement complet des 10 questions (NF525, OWASP, SQL Avancé, JavaFX).
+
+[NOTE]
+.Évaluation - Très satisfaisant
+====
+L'ensemble de vos réponses est précis et techniquement juste.
+L'analyse sur la limite de l'opérateur `instanceof` (violation des bonnes pratiques POO) est particulièrement pertinente. L'explication sur le rôle du Launcher JavaFX pour contourner les contraintes de modularité est également exacte.
+====
+
+== Conclusion
+
+Note estimée : *15 / 20*
+
+La copie est bonne et le travail est complet. Pour conserver et améliorer ce résultat par la suite, vous devez :
+
+- Présenter auprès de M. Robert vos réponses.
+- Présenter le fonctionnement du prototype développé (ou copies d'écran)
+
+En effet il est nécessaire que vous puissiez démontrer votre compréhension des IA et mettre en oeuvre concrètement et techniquement les résultats.

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Événements | Admin - Aujourd'hui vers Demain</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+    <style>
+        .back-to-portfolio {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-body-tertiary d-flex flex-column min-vh-100">
+
+    <a href="../../index.html" class="back-to-portfolio">← Retour au Portfolio</a>
+
+    <!-- NAVBAR ADMIN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="../index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain (Admin)
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house-fill me-1"></i>Accueil</a></li>
+            <li class="nav-item dropdown ms-2">
+                <a class="nav-link dropdown-toggle btn btn-warning text-dark px-3 rounded-pill fw-bold shadow-sm" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear-fill me-1"></i>ADMIN
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item active" href="dashboard.html"><i class="bi bi-calendar-event me-2"></i>Gérer événements</a></li>
+                    <li><a class="dropdown-item" href="galerie.html"><i class="bi bi-images me-2"></i>Gérer Galerie</a></li>
+                    <li><a class="dropdown-item" href="inscriptions.html"><i class="bi bi-journal-check me-2"></i>Inscriptions Devoirs</a></li>
+                    <li><a class="dropdown-item" href="messages.html"><i class="bi bi-inbox-fill me-2"></i>Messagerie</a></li>
+                    <li><a class="dropdown-item" href="security.html"><i class="bi bi-shield-lock-fill me-2"></i>Sécurité</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="../index.html">Déconnexion</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold"><i class="bi bi-calendar-check me-2 text-primary"></i>Gestion des Événements</h1>
+            <button class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" onclick="alert('Simulation: Ouverture du formulaire d\'ajout.')">
+                <i class="bi bi-plus-lg me-2"></i>Nouvel Événement
+            </button>
+        </div>
+
+        <div class="table-responsive bg-white rounded-4 shadow-sm">
+            <table class="table table-hover mb-0 p-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4">Titre</th>
+                        <th>Date de l'événement</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    <tr>
+                        <td class="ps-4 fw-bold">Rentrée Scolaire & Fournitures</td>
+                        <td>01/09/2026</td>
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-outline-warning me-1 rounded-pill"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4 fw-bold">Grande Fête de Quartier</td>
+                        <td>15/06/2026</td>
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-outline-warning me-1 rounded-pill"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4 fw-bold">Atelier Citoyen</td>
+                        <td>20/05/2026</td>
+                        <td class="text-end pe-4">
+                            <button class="btn btn-sm btn-outline-warning me-1 rounded-pill"><i class="bi bi-pencil-fill"></i> Modifier</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill"></i> Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4 p-4 bg-info bg-opacity-10 rounded-4 border border-info border-opacity-25">
+            <h5 class="fw-bold"><i class="bi bi-info-circle-fill me-2 text-info"></i>Note de démo</h5>
+            <p class="mb-0 text-muted small">Ceci est une simulation interactive de votre interface de gestion. Les boutons "Modifier" et "Supprimer" affichent des alertes pour démontrer l'interactivité sans modifier de base de données réelle.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTIQUE -->
+    <footer class="bg-dark text-white pt-5 mt-auto">
+        <div class="container pb-4 text-center">
+            <p class="mb-0">© 2026 Administration Aujourd'hui vers Demain</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

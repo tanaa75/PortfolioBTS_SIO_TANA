@@ -1,0 +1,18 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environnement virtuel
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Base de données locale
+scores.db
+
+# Gemini
+.gemini/

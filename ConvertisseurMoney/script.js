@@ -9,20 +9,19 @@ async function convertCurrency() {
         return;
     }
 
-    let apiKey = "91b97f3214eab6963d8d0061";  
-    let url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${fromCurrency}`;
+    let url = `https://api.coinbase.com/v2/exchange-rates?currency=${fromCurrency}`;
 
     try {
         let response = await fetch(url);
-        let data = await response.json();
-        let rate = data.conversion_rates[toCurrency];
+        let result = await response.json();
+        let rate = result.data.rates[toCurrency];
 
         if (!rate) {
             resultElement.innerText = "Conversion impossible.";
             return;
         }
 
-        let convertedAmount = (amount * rate).toFixed(2);
+        let convertedAmount = (amount * parseFloat(rate)).toFixed(2);
         resultElement.innerText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
     } catch (error) {
         resultElement.innerText = "Erreur lors de la récupération des taux.";

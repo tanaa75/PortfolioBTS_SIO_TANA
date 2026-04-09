@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="webcaisse.controleur.RechercheController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Paramétrer les critères de recherche des consommateurs réguliers" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nombre de ventes minimum :" />
+        <TextField fx:id="txtSeuil" prefWidth="50" promptText="Ex: 1"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Du :" />
+        <DatePicker fx:id="dpDateDebut" />
+        <Label text="Au :" />
+        <DatePicker fx:id="dpDateFin" />
+    </HBox>
+
+    <Button text="Rechercher les consommateurs" onAction="#handleRechercher" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+
+    <Label fx:id="lblMessage" textFill="red" />
+
+    <TableView fx:id="tableConso" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="100" />
+            <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="100" />
+            <TableColumn fx:id="colMail" text="Mail" prefWidth="150" />
+            <TableColumn fx:id="colTel" text="Téléphone" prefWidth="100" />
+            <TableColumn fx:id="colNbVentes" text="Nb Ventes" prefWidth="80" />
+        </columns>
+    </TableView>
+</VBox>

@@ -1,0 +1,156 @@
+/**
+ * ===========================================
+ * STYLES PAGE ACTIONS - AUJOURD'HUI VERS DEMAIN
+ * ===========================================
+ * 
+ * Styles pour la page d'aide aux devoirs et actions
+ */
+
+/* ===========================================
+   BASE
+   =========================================== */
+body {
+    transition: background-color 0.5s;
+}
+
+/* ===========================================
+   EFFET SURVOL DES CARTES
+   =========================================== */
+.hover-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+}
+
+.hover-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hover-card .emoji-icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.hover-card:hover .emoji-icon {
+    transform: scale(1.3) rotate(10deg);
+}
+
+/* ===========================================
+   SECTION ACTIONS - BASE
+   =========================================== */
+.actions-section {
+    background: var(--bs-body-bg);
+}
+
+.actions-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.actions-info-card:hover .actions-icon-wrapper {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.info-badge {
+    transition: all 0.3s ease;
+}
+
+.info-badge:hover {
+    transform: translateY(-3px);
+}
+
+/* ===========================================
+   MODE CLAIR
+   =========================================== */
+[data-bs-theme="light"] .actions-subtitle {
+    color: #6c757d;
+}
+
+[data-bs-theme="light"] .actions-info-card {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+}
+
+[data-bs-theme="light"] .actions-icon-wrapper {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+}
+
+[data-bs-theme="light"] .actions-title {
+    color: #212529;
+}
+
+[data-bs-theme="light"] .actions-text {
+    color: #6c757d;
+}
+
+[data-bs-theme="light"] .actions-border {
+    border-color: #e9ecef !important;
+}
+
+[data-bs-theme="light"] .actions-subtitle-small {
+    color: #495057;
+}
+
+[data-bs-theme="light"] .info-badge {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+[data-bs-theme="light"] .actions-label {
+    color: #6c757d;
+}
+
+[data-bs-theme="light"] .actions-value {
+    color: #212529;
+}
+
+/* ===========================================
+   MODE SOMBRE
+   =========================================== */
+[data-bs-theme="dark"] .actions-subtitle {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .actions-info-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="dark"] .actions-icon-wrapper {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+}
+
+[data-bs-theme="dark"] .actions-title {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .actions-text {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .actions-border {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .actions-subtitle-small {
+    color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .info-badge {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-bs-theme="dark"] .actions-label {
+    color: #868e96;
+}
+
+[data-bs-theme="dark"] .actions-value {
+    color: #f8f9fa;
+}

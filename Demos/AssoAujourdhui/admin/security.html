@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité - Aujourd'hui vers Demain</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <style>
+        .back-to-portfolio {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .card-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+
+    <a href="../../index.html" class="back-to-portfolio">← Retour au Portfolio</a>
+
+    <!-- NAVBAR ADMIN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-0 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="../index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain (Admin)
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house-fill me-1"></i>Accueil</a></li>
+            <li class="nav-item dropdown ms-2">
+                <a class="nav-link dropdown-toggle btn btn-warning text-dark px-3 rounded-pill fw-bold shadow-sm" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear-fill me-1"></i>ADMIN
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item" href="dashboard.html"><i class="bi bi-calendar-event me-2"></i>Gérer événements</a></li>
+                    <li><a class="dropdown-item" href="galerie.html"><i class="bi bi-images me-2"></i>Gérer Galerie</a></li>
+                    <li><a class="dropdown-item" href="inscriptions.html"><i class="bi bi-journal-check me-2"></i>Inscriptions Devoirs</a></li>
+                    <li><a class="dropdown-item" href="messages.html"><i class="bi bi-inbox-fill me-2"></i>Messagerie</a></li>
+                    <li><a class="dropdown-item active" href="security.html"><i class="bi bi-shield-lock-fill me-2"></i>Sécurité</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                
+                <div class="card card-custom p-4 p-md-5">
+                    
+                    <div class="text-center mb-4">
+                        <div class="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 70px; height: 70px;">
+                            <i class="bi bi-shield-lock-fill fs-1"></i>
+                        </div>
+                        <h2 class="fw-bold mt-3 text-danger">Sécurité du Compte</h2>
+                        <p class="text-muted small">Modifiez votre mot de passe administrateur</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); alert('Simulation : Mot de passe modifié avec succès !'); window.location.href='dashboard.html';">
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-secondary">Mot de passe actuel</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 rounded-start-3"><i class="bi bi-key text-muted"></i></span>
+                                <input type="password" class="form-control border-start-0 rounded-end-3" placeholder="••••••••" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-4">
+                            <hr class="flex-grow-1 opacity-25">
+                            <span class="px-3 text-muted small text-uppercase fw-bold">Nouveau mot de passe</span>
+                            <hr class="flex-grow-1 opacity-25">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Nouveau mot de passe</label>
+                            <input type="password" class="form-control rounded-3" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-secondary">Confirmer le nouveau mot de passe</label>
+                            <input type="password" class="form-control rounded-3" required>
+                        </div>
+                        
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-danger btn-lg rounded-pill fw-bold shadow">
+                                <i class="bi bi-save2-fill me-2"></i> Enregistrer le changement
+                            </button>
+                            <a href="dashboard.html" class="btn btn-outline-secondary rounded-pill fw-bold border-0">
+                                Annuler et retour
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

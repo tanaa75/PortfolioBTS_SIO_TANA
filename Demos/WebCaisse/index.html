@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>WebCaisseFX - Gestion Fidélité (Aperçu Authentique)</title>
+    <style>
+        body { background-color: #f4f4f4; font-family: 'Segoe UI', Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .javafx-window { background: #fdfdfd; border: 1px solid #c0c0c0; width: 750px; padding: 25px; box-shadow: 2px 2px 15px rgba(0,0,0,0.1); position: relative; }
+        
+        .header-title { font-size: 16pt; font-weight: bold; color: #333; margin-bottom: 25px; text-align: center; }
+        
+        .form-row { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 10pt; }
+        .form-label { min-width: 180px; }
+        .tk-input { border: 1px solid #bbb; padding: 5px; border-radius: 3px; }
+        .tk-date { border: 1px solid #bbb; padding: 4px; background: #fff; width: 140px; }
+        
+        .btn-search {
+            display: block;
+            margin: 20px auto;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 11pt;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-search:hover { background: #0056b3; }
+        
+        .table-container { 
+            border: 1px solid #ddd; 
+            height: 250px; 
+            background: #fff; 
+            overflow-y: auto; 
+            margin-top: 20px; 
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+        th { background: #f0f0f0; border: 1px solid #ddd; padding: 8px; text-align: left; position: sticky; top: 0; }
+        td { border: 1px solid #eee; padding: 8px; }
+        tr:nth-child(even) { background: #fafafa; }
+        tr:hover { background: #f0f7ff; }
+
+        .back-portfolio { position: absolute; top: 5px; left: 5px; text-decoration: none; color: #666; font-size: 0.75em; }
+    </style>
+</head>
+<body>
+
+<div class="javafx-window">
+    <a href="javascript:history.back()" class="back-portfolio">← Quitter</a>
+
+    <div class="header-title">Paramétrer les critères de recherche des consommateurs réguliers</div>
+
+    <div class="form-row">
+        <div class="form-label">Nombre de ventes minimum :</div>
+        <input type="number" class="tk-input" id="min-sales" value="1" style="width: 50px;">
+    </div>
+
+    <div class="form-row">
+        <div class="form-label">Période du :</div>
+        <input type="date" class="tk-date" value="2025-01-01">
+        <div>au :</div>
+        <input type="date" class="tk-date" value="2025-04-30">
+    </div>
+
+    <button class="btn-search" onclick="simulateSearch()">Rechercher les consommateurs</button>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 100px;">Nom</th>
+                    <th style="width: 100px;">Prénom</th>
+                    <th style="width: 150px;">Mail</th>
+                    <th style="width: 100px;">Téléphone</th>
+                    <th style="width: 80px;">Nb Ventes</th>
+                </tr>
+            </thead>
+            <tbody id="result-body">
+                <!-- Simulation de données -->
+                <tr>
+                    <td>DURAND</td>
+                    <td>Jean</td>
+                    <td>j.durand@email.com</td>
+                    <td>01 23 45 67 89</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>LEFEBVRE</td>
+                    <td>Marie</td>
+                    <td>m.lefebvre@pro.fr</td>
+                    <td>06 98 76 54 32</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>MOREAU</td>
+                    <td>Lucas</td>
+                    <td>lucas.m@gmail.com</td>
+                    <td>07 11 22 33 44</td>
+                    <td>15</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function simulateSearch() {
+        const body = document.getElementById('result-body');
+        const min = document.getElementById('min-sales').value;
+        
+        // On affiche un message de chargement rapide comme en Java
+        body.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 50px; color: #666;">Recherche en cours dans la base de données...</td></tr>';
+        
+        setTimeout(() => {
+            body.innerHTML = `
+                <tr><td>CA</td><td>Tanavong</td><td>t.ca@ecole.fr</td><td>06 00 00 11 22</td><td>24</td></tr>
+                <tr><td>DURAND</td><td>Jean</td><td>j.durand@email.com</td><td>01 23 45 67 89</td><td>12</td></tr>
+                <tr><td>MOREAU</td><td>Lucas</td><td>lucas.m@gmail.com</td><td>07 11 22 33 44</td><td>15</td></tr>
+            `;
+        }, 800);
+    }
+</script>
+
+</body>
+</html>

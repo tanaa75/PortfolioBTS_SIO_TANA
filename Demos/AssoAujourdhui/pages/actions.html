@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Actions | Aujourd'hui vers Demain</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/actions.css">
+    <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+    <style>
+        .back-to-portfolio {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <a href="../../index.html" class="back-to-portfolio">← Retour au Portfolio</a>
+
+    <!-- NAVBAR IDENTIQUE -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="../index.html">
+            <img src="https://cdn-icons-png.flaticon.com/512/2904/2904869.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+            Aujourd'hui vers Demain
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house-fill me-1"></i>Accueil</a></li>
+            <li class="nav-item"><a class="nav-link active" href="actions.html"><i class="bi bi-book-fill me-1"></i>Nos Actions</a></li>
+            <li class="nav-item"><a class="nav-link" href="benevolat.html"><i class="bi bi-people-fill me-1"></i>Bénévolat</a></li>
+            <li class="nav-item"><a class="nav-link" href="galerie.html"><i class="bi bi-camera-fill me-1"></i>Galerie</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html"><i class="bi bi-envelope-fill me-1"></i>Contact</a></li>
+            <li class="nav-item ms-2">
+                <a class="btn btn-outline-light rounded-pill px-4 fw-bold" href="../auth/connexion.html">Se connecter</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENU -->
+    <div class="actions-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-down">
+                <h2 class="display-5 fw-bold mb-3">L'Aide aux Devoirs</h2>
+                <p class="lead">Accompagner chaque enfant vers la réussite</p>
+            </div>
+            
+            <div class="row align-items-center g-5" id="devoirs">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="actions-info-card p-4 rounded-4 shadow-lg h-100 bg-white">
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-pencil-fill fs-1 text-warning me-3"></i>
+                            <div>
+                                <h3 class="fw-bold mb-3 text-primary">Notre Mission</h3>
+                                <p>L'aide aux devoirs chez <strong>Aujourd'hui vers Demain</strong>, c'est un espace bienveillant où chaque enfant bénéficie d'une attention particulière.</p>
+                            </div>
+                        </div>
+                        <div class="border-top pt-4 mt-3">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-clipboard-check me-2 text-primary"></i>Informations pratiques</h5>
+                            <div class="row g-3">
+                                <div class="col-6"><div class="p-3 bg-light rounded text-center"><strong>Lun-Ven</strong><br><small>Jours</small></div></div>
+                                <div class="col-6"><div class="p-3 bg-light rounded text-center"><strong>16h30-18h</strong><br><small>Horaires</small></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-primary shadow rounded-4">
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h5 class="mb-0">Inscrire mon enfant</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="text-center py-4">
+                                <i class="bi bi-lock-fill display-4 text-secondary mb-3"></i>
+                                <h5 class="fw-bold">Espace réservé</h5>
+                                <p class="text-muted">Connectez-vous pour inscrire votre enfant.</p>
+                                <a href="../auth/connexion.html" class="btn btn-primary rounded-pill px-4 fw-bold mt-3">Aller à la connexion</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTIQUE -->
+    <footer class="bg-dark text-white pt-5 mt-auto">
+        <div class="container pb-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="fw-bold mb-3">Aujourd'hui vers Demain</h4>
+                    <p class="opacity-75">Notre mission est de renforcer les liens sociaux et d'apporter une aide concrète aux habitants de Noisy-le-Sec.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h5 class="fw-bold mb-4 text-warning text-uppercase">Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="../index.html" class="text-white text-decoration-none">Accueil</a></li>
+                        <li class="mb-2"><a href="actions.html" class="text-white text-decoration-none text-warning">Nos Actions</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4">Nous Contacter</h5>
+                    <p class="mb-2"><i class="bi bi-geo-alt-fill text-warning me-2"></i>116 rue de l'Avenir, 93130 Noisy-le-Sec</p>
+                    <p><i class="bi bi-envelope-fill text-warning me-2"></i>contact@asso.fr</p>
+                </div>
+            </div>
+            <div class="text-center mt-5 pt-4 border-top opacity-50 small">
+                © 2026 Association Aujourd'hui vers Demain
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>

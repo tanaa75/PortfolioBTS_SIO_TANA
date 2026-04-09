@@ -1,0 +1,53 @@
+{% extends "boutique/base.html" %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 60px auto; padding: 35px; border: 1px solid #ddd; border-radius: 12px; background-color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.08);">
+
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #333; margin-bottom: 10px;">Bon retour !</h1>
+        <p style="color: #666;">Connectez-vous pour accéder à votre panier et vos commandes.</p>
+    </div>
+
+    {% if form.errors %}
+    <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 0.9em;">
+        Votre nom d'utilisateur ou mot de passe est incorrect.
+    </div>
+    {% endif %}
+
+    <form method="post" style="display: flex; flex-direction: column; gap: 20px;">
+        {% csrf_token %}
+
+        <style>
+            /* Uniformisation des champs de saisie */
+            form p { margin: 0; }
+            form label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; }
+            form input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                box-sizing: border-box;
+                font-size: 1em;
+            }
+            form input:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+            }
+        </style>
+
+        {{ form.as_p }}
+
+        <button type="submit" style="background: #343a40; color: white; padding: 14px; border: none; border-radius: 6px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: background 0.3s;">
+            Se connecter
+        </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+        <p style="color: #666; margin-bottom: 10px;">Vous n'avez pas encore de compte ?</p>
+        <a href="{% url 'register' %}" style="display: inline-block; color: #007bff; text-decoration: none; font-weight: bold; border: 1px solid #007bff; padding: 8px 20px; border-radius: 5px;">
+            Créer un compte
+        </a>
+    </div>
+</div>
+{% endblock %}

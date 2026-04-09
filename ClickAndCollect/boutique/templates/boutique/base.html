@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Click & Collect</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+        .navbar { background: #343a40; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .navbar a { color: white; text-decoration: none; margin-right: 20px; font-weight: 500; }
+        .navbar a:hover { color: #ffc107; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-logout { background: none; border: none; color: #ff6b6b; cursor: pointer; font: inherit; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div>
+        <a href="{% url 'liste_produits' %}" style="font-size: 1.2em; font-weight: bold;">👟 Ma Boutique</a>
+        <a href="{% url 'liste_produits' %}">Catalogue</a>
+        <a href="{% url 'voir_panier' %}">🛒 Panier</a>
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'historique_commandes' %}">Mes Commandes</a>
+        <span>👤 {{ user.username }}</span>
+        <form action="{% url 'logout' %}" method="post" style="display: inline; margin-left: 10px;">
+            {% csrf_token %}
+            <button type="submit" class="btn-logout">Déconnexion</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Connexion</a>
+        <a href="{% url 'register' %}">S'inscrire</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    {% include "messages.html" %}
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>
