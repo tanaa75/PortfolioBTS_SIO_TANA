@@ -2,185 +2,1240 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Jeu de Mémoire - Aperçu Authentique (Tkinter)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Mémoire - Simulation Web</title>
     <style>
-        body { background-color: #f0f0f0; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .window-frame { background: #f0f0f0; border: 2px solid #808080; width: 800px; padding: 20px; box-shadow: 4px 4px 10px rgba(0,0,0,0.2); position: relative; }
-        
-        .header-title { font-family: 'Arial', sans-serif; font-size: 26pt; font-weight: bold; color: #00008b; text-align: center; margin-bottom: 20px; }
-        .theme-label { font-family: 'Arial', sans-serif; font-size: 15pt; color: #800080; text-align: center; margin-bottom: 20px; }
-        
-        .stats-container { display: flex; justify-content: center; gap: 60px; margin-bottom: 20px; }
+        /* ==================== BASE ==================== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e8f4f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== ÉCRAN MENU ==================== */
+        #screen-menu {
+            background: #add8e6; /* lightblue - couleur exacte Tkinter */
+            border: 2px solid #888;
+            width: 720px;
+            max-width: 98vw;
+            padding: 0 0 30px 0;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.25);
+            overflow-y: auto;
+            max-height: 98vh;
+        }
+
+        /* ==================== ÉCRAN JEU ==================== */
+        #screen-game {
+            display: none;
+            background: #f0f0f0; /* couleur fenêtre Tkinter par défaut */
+            border: 2px solid #888;
+            width: 820px;
+            max-width: 98vw;
+            padding: 0 0 30px 0;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.25);
+            overflow-y: auto;
+            max-height: 98vh;
+            position: relative;
+        }
+
+        /* ==================== ÉCRAN HALL OF FAME ==================== */
+        #screen-hof {
+            display: none;
+            background: #ffffe0; /* lightyellow */
+            border: 2px solid #888;
+            width: 520px;
+            max-width: 98vw;
+            padding: 0 0 20px 0;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.25);
+            max-height: 98vh;
+            overflow-y: auto;
+        }
+
+        /* ==================== BARRE DE TITRE SIMULÉE ==================== */
+        .title-bar {
+            background: linear-gradient(to right, #000080, #1084d0);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: default;
+            user-select: none;
+        }
+        .title-bar-btns { display: flex; gap: 5px; }
+        .win-btn {
+            width: 14px; height: 14px;
+            border: 1px solid #aaa;
+            font-size: 9px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; background: #ddd; color: #333;
+        }
+
+        /* ==================== MENU PRINCIPAL ==================== */
+        .menu-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: darkblue;
+            text-align: center;
+            padding: 25px 10px 5px;
+        }
+        .menu-subtitle {
+            font-size: 14px;
+            color: navy;
+            text-align: center;
+            padding: 8px 10px 15px;
+        }
+
+        .label-frame {
+            border: 2px solid #888;
+            border-radius: 4px;
+            margin: 15px 30px;
+            padding: 15px;
+            position: relative;
+        }
+        .label-frame-title {
+            position: absolute;
+            top: -11px;
+            left: 12px;
+            background: #add8e6;
+            padding: 0 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .label-frame-title.green { color: darkgreen; }
+        .label-frame-title.purple { color: purple; }
+
+        .radio-option {
+            margin: 8px 5px;
+        }
+        .radio-option label {
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .radio-option label.green { color: darkgreen; }
+        .radio-option label.purple { color: purple; }
+        .radio-desc {
+            font-size: 10px;
+            color: gray;
+            padding-left: 28px;
+            margin-top: 2px;
+        }
+        input[type="radio"] { cursor: pointer; width: 16px; height: 16px; }
+
+        .info-box {
+            background: lightyellow;
+            border: 2px solid #ccc;
+            margin: 15px 30px;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: darkorange;
+        }
+
+        /* ==================== BOUTONS MENU ==================== */
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .tk-btn {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            border: 2px outset #ccc;
+            cursor: pointer;
+            padding: 8px 20px;
+            min-width: 200px;
+        }
+        .tk-btn:active { border-style: inset; }
+        .btn-start { background: green; color: white; font-size: 16px; font-weight: bold; padding: 10px 30px; }
+        .btn-hof    { background: gold; color: black; }
+        .btn-quit   { background: red; color: white; }
+
+        /* ==================== JEU - TITRE & STATS ==================== */
+        .game-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: darkblue;
+            text-align: center;
+            padding: 15px 10px 5px;
+        }
+        .game-theme {
+            font-size: 15px;
+            color: purple;
+            text-align: center;
+            padding: 5px;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 10px 20px;
+        }
         .stat-box { text-align: center; }
-        .stat-title-current { font-weight: bold; color: #006400; font-size: 14pt; margin-bottom: 5px; }
-        .stat-title-record { font-weight: bold; color: #8b0000; font-size: 14pt; margin-bottom: 5px; }
-        .stat-text { font-size: 13pt; }
-        
-        .separator { height: 2px; background: #808080; width: 90%; margin: 20px auto; }
-        
-        .game-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: fit-content; margin: 30px auto; }
-        .tk-button {
-            width: 130px;
-            height: 90px;
-            background-color: #d3d3d3; /* lightgray */
-            border: 2px solid #808080;
-            font-size: 22pt;
+        .stat-title-current { font-weight: bold; color: darkgreen; font-size: 14px; margin-bottom: 3px; }
+        .stat-title-record  { font-weight: bold; color: darkred;  font-size: 14px; margin-bottom: 3px; }
+        .stat-text { font-size: 13px; }
+
+        .separator {
+            height: 2px;
+            background: gray;
+            margin: 12px 40px;
+        }
+
+        /* ==================== GRILLE DE CARTES ==================== */
+        #game-grid {
+            display: grid;
+            gap: 8px;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+
+        .tk-card {
+            width: 110px;
+            height: 80px;
+            background: lightgray;
+            border: 2px outset #aaa;
+            font-size: 22px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             user-select: none;
+            transition: background 0.15s, color 0.15s;
+            color: black;
         }
-        .tk-button:active { background-color: #a9a9a9; }
-        .tk-button.flipped { background-color: #add8e6; color: #00008b; }
-        .tk-button.matched { background-color: #90ee90; color: #006400; }
-        
-        .footer-controls { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .control-btn { padding: 10px 15px; border: 1px solid #808080; font-size: 13pt; cursor: pointer; }
-        .btn-restart { background-color: #add8e6; }
-        .btn-reset { background-color: #ffa500; }
-        .btn-menu { background-color: #90ee90; }
-        .btn-sound { background-color: #ffff00; font-size: 12pt; }
-        .btn-help { background-color: #ffc0cb; font-size: 12pt; }
-        
-        .back-portfolio { position: absolute; top: 10px; left: 10px; text-decoration: none; color: #000; font-size: 0.8em; border: 1px solid #ccc; padding: 5px; background: #eee; }
+        .tk-card:active { border-style: inset; }
+        .tk-card.flipped  { background: lightblue; color: darkblue; }
+        .tk-card.matched  { background: lightgreen; color: darkgreen; cursor: default; }
+        .tk-card.hint     { background: lightblue; color: darkblue; }
+        .tk-card.blocked  { cursor: default; }
+
+        /* ==================== BOUTONS BAS JEU ==================== */
+        .game-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 10px;
+        }
+        .btn-restart { background: lightblue; }
+        .btn-reset   { background: orange; }
+        .btn-menu    { background: lightgreen; }
+        .btn-sound-on  { background: yellow; }
+        .btn-sound-off { background: #888; color: white; }
+        .btn-help    { background: pink; }
+
+        /* ==================== BOUTON TRICHE INVISIBLE ==================== */
+        #cheat-btn {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 12px;
+            height: 12px;
+            background: #f0f0f0;
+            color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 8px;
+            z-index: 10;
+        }
+
+        /* ==================== MENU CONTEXTUEL TRICHE ==================== */
+        #cheat-popup {
+            display: none;
+            position: fixed;
+            background: white;
+            border: 1px solid #888;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 200px;
+        }
+        #cheat-popup button {
+            display: block;
+            width: 100%;
+            padding: 8px 15px;
+            text-align: left;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+        }
+        #cheat-popup button:hover { background: #0000cd; color: white; }
+
+        /* ==================== HALL OF FAME ==================== */
+        .hof-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: gold;
+            text-align: center;
+            padding: 15px 10px 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .hof-filters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            flex-wrap: wrap;
+        }
+        .hof-filters label { font-size: 12px; color: #333; }
+        .hof-filters select {
+            font-size: 12px;
+            padding: 3px 6px;
+            border: 1px solid #aaa;
+            background: white;
+        }
+        .hof-table-wrapper {
+            margin: 10px 30px;
+            border: 2px inset #aaa;
+            background: white;
+            min-height: 120px;
+        }
+        .hof-header {
+            display: flex;
+            background: orange;
+            padding: 5px 0;
+        }
+        .hof-header span, .hof-row span {
+            font-size: 12px;
+            text-align: center;
+        }
+        .hof-header span { font-weight: bold; font-size: 12px; }
+        .hof-col-name  { width: 50%; text-align: left; padding-left: 10px; }
+        .hof-col-time  { width: 25%; }
+        .hof-col-moves { width: 25%; }
+        .hof-row {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
+            background: white;
+        }
+        .hof-empty {
+            text-align: center;
+            color: gray;
+            padding: 20px;
+            font-size: 13px;
+        }
+        .btn-hof-close { background: tomato; color: white; margin: 10px auto; display: block; }
+
+        /* ==================== OVERLAY (modal de victoire/aide) ==================== */
+        #overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+        #overlay.active { display: flex; }
+
+        .modal-box {
+            background: #f0f0f0;
+            border: 2px outset #ccc;
+            min-width: 280px;
+            max-width: 380px;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
+        }
+        .modal-title-bar {
+            background: linear-gradient(to right, #000080, #1084d0);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        .modal-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .modal-body p { font-size: 13px; margin-bottom: 10px; line-height: 1.6; }
+        .modal-input {
+            width: 100%;
+            padding: 6px;
+            font-size: 13px;
+            border: 2px inset #ccc;
+            margin: 8px 0;
+        }
+        .modal-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .modal-btn {
+            padding: 6px 18px;
+            font-size: 13px;
+            border: 2px outset #ccc;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+        .modal-btn:active { border-style: inset; }
+        .modal-ok  { background: #008000; color: white; }
+        .modal-cancel { background: #ddd; }
+
+        /* ==================== BACK LINK ==================== */
+        .back-link {
+            display: inline-block;
+            margin: 10px 20px 0;
+            font-size: 11px;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #aaa;
+            padding: 4px 10px;
+            background: #eee;
+            cursor: pointer;
+        }
+        .back-link:hover { background: #ddd; }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 500px) {
+            .tk-card { width: 70px; height: 55px; font-size: 16px; }
+            .stats-row { gap: 20px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="window-frame">
-    <a href="javascript:history.back()" class="back-portfolio">← Retour Portfolio</a>
+<!-- ═══════════════════════ ÉCRAN MENU ═══════════════════════ -->
+<div id="screen-menu">
+    <div class="title-bar">
+        <span>Jeu de Mémoire - Menu Principal</span>
+        <div class="title-bar-btns">
+            <div class="win-btn">_</div>
+            <div class="win-btn">□</div>
+            <div class="win-btn" onclick="window.history.back()">✕</div>
+        </div>
+    </div>
 
-    <div class="header-title">JEU DE MÉMOIRE - NORMAL</div>
-    <div class="theme-label" id="current-theme">Thème: Fruits</div>
+    <div style="padding: 0 0 5px;">
+        <a class="back-link" onclick="window.history.back()">← Retour Portfolio</a>
+    </div>
 
-    <div class="stats-container">
+    <div class="menu-title">🧠 JEU DE MÉMOIRE 🧠</div>
+    <div class="menu-subtitle">Testez votre mémoire !</div>
+
+    <!-- Niveaux de difficulté -->
+    <div class="label-frame" style="background:#add8e6;">
+        <span class="label-frame-title green">🎯 NIVEAU DE DIFFICULTÉ</span>
+
+        <div class="radio-option">
+            <label class="green">
+                <input type="radio" name="level" value="Facile"> 🟢 Facile (3×4)
+            </label>
+            <div class="radio-desc">12 cartes - Parfait pour débuter</div>
+        </div>
+        <div class="radio-option">
+            <label class="green">
+                <input type="radio" name="level" value="Normal" checked> 🔵 Normal (4×4)
+            </label>
+            <div class="radio-desc">16 cartes - Équilibré</div>
+        </div>
+        <div class="radio-option">
+            <label class="green">
+                <input type="radio" name="level" value="Difficile"> 🟠 Difficile (5×6)
+            </label>
+            <div class="radio-desc">30 cartes - Pour experts</div>
+        </div>
+        <div class="radio-option">
+            <label class="green">
+                <input type="radio" name="level" value="Expert"> 🔴 Expert (6×6)
+            </label>
+            <div class="radio-desc">36 cartes - Maximum challenge !</div>
+        </div>
+    </div>
+
+    <!-- Thèmes -->
+    <div class="label-frame" style="background:#add8e6;">
+        <span class="label-frame-title purple">🎨 THÈME</span>
+
+        <div class="radio-option">
+            <label class="purple">
+                <input type="radio" name="theme" value="Chiffres" checked> 🔢 Chiffres
+            </label>
+            <div class="radio-desc">Classique avec nombres</div>
+        </div>
+        <div class="radio-option">
+            <label class="purple">
+                <input type="radio" name="theme" value="Fruits"> 🍎 Fruits
+            </label>
+            <div class="radio-desc">Délicieux fruits colorés</div>
+        </div>
+        <div class="radio-option">
+            <label class="purple">
+                <input type="radio" name="theme" value="Sports"> ⚽ Sports
+            </label>
+            <div class="radio-desc">Pour les sportifs !</div>
+        </div>
+    </div>
+
+    <!-- Info niveau sélectionné -->
+    <div class="info-box" id="level-info">
+        📊 Normal sélectionné 🔵 - 16 cartes (4×4)
+    </div>
+
+    <!-- Boutons -->
+    <div class="menu-buttons">
+        <button class="tk-btn btn-start" onclick="startGame()">🚀 COMMENCER LE JEU</button>
+        <button class="tk-btn btn-hof"   onclick="showHOF()">🏆 Voir les Records</button>
+        <button class="tk-btn btn-quit"  onclick="window.history.back()">❌ Quitter</button>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════ ÉCRAN JEU ═══════════════════════ -->
+<div id="screen-game">
+    <div class="title-bar" id="game-titlebar">
+        <span id="game-titlebar-text">Jeu de Mémoire - Normal (Chiffres)</span>
+        <div class="title-bar-btns">
+            <div class="win-btn">_</div>
+            <div class="win-btn">□</div>
+            <div class="win-btn" onclick="returnToMenu()">✕</div>
+        </div>
+    </div>
+
+    <!-- Bouton TRICHE INVISIBLE (même couleur que le fond) -->
+    <button id="cheat-btn" onclick="openCheatMenu(event)" title=""></button>
+
+    <div class="game-title" id="game-title">JEU DE MÉMOIRE - NORMAL</div>
+    <div class="game-theme" id="game-theme-label">Thème: Chiffres</div>
+
+    <!-- Stats -->
+    <div class="stats-row">
         <div class="stat-box">
             <div class="stat-title-current">PARTIE ACTUELLE</div>
-            <div class="stat-text" id="moves">Coups: 0</div>
-            <div class="stat-text" id="timer">Temps: 0s</div>
+            <div class="stat-text" id="moves-display">Coups: 0</div>
+            <div class="stat-text" id="time-display">Temps: 0s</div>
         </div>
         <div class="stat-box">
-            <div class="stat-title-record">RECORDS NORMAL</div>
-            <div class="stat-text">Moins de coups: 12</div>
-            <div class="stat-text">Meilleur temps: 45s</div>
+            <div class="stat-title-record" id="records-title">RECORDS NORMAL</div>
+            <div class="stat-text" id="best-moves-display">Moins de coups: --</div>
+            <div class="stat-text" id="best-time-display">Meilleur temps: --</div>
         </div>
     </div>
 
     <div class="separator"></div>
 
-    <div class="game-grid" id="game-grid">
-        <!-- Généré par JS -->
-    </div>
+    <!-- Grille de cartes -->
+    <div id="game-grid"></div>
 
-    <div class="footer-controls">
-        <button class="control-btn btn-restart" onclick="initGame()">🔄 Recommencer</button>
-        <button class="control-btn btn-reset">🏆 Reset Records</button>
-        <button class="control-btn btn-menu">🏠 Menu Principal</button>
-        <button class="control-btn btn-sound">🔊 Sons ON</button>
-        <button class="control-btn btn-help" onclick="revealHelp()">💡 Aide</button>
+    <!-- Boutons bas -->
+    <div class="game-controls">
+        <button class="tk-btn btn-restart" onclick="restartGame(false)">🔄 Recommencer</button>
+        <button class="tk-btn btn-reset"   onclick="resetRecords()">🏆 Reset Records</button>
+        <button class="tk-btn btn-menu"    onclick="returnToMenu()">🏠 Menu Principal</button>
+        <button class="tk-btn btn-sound-on" id="sound-btn" onclick="toggleSound()">🔊 Sons ON</button>
+        <button class="tk-btn btn-help"    onclick="activateHelp()">💡 Aide</button>
     </div>
 </div>
 
+
+<!-- ═══════════════════════ HALL OF FAME ═══════════════════════ -->
+<div id="screen-hof">
+    <div class="title-bar">
+        <span>🏆 Hall of Fame</span>
+        <div class="title-bar-btns">
+            <div class="win-btn" onclick="closeHOF()">✕</div>
+        </div>
+    </div>
+    <div class="hof-title">🏆 HALL OF FAME 🏆</div>
+
+    <div class="hof-filters">
+        <label>Niveau :</label>
+        <select id="hof-level" onchange="refreshHOF()">
+            <option>Facile</option>
+            <option selected>Normal</option>
+            <option>Difficile</option>
+            <option>Expert</option>
+        </select>
+        <label>Thème :</label>
+        <select id="hof-theme" onchange="refreshHOF()">
+            <option selected>Chiffres</option>
+            <option>Fruits</option>
+            <option>Sports</option>
+        </select>
+    </div>
+
+    <div class="hof-table-wrapper">
+        <div class="hof-header">
+            <span class="hof-col-name">Joueur</span>
+            <span class="hof-col-time">Temps</span>
+            <span class="hof-col-moves">Coups</span>
+        </div>
+        <div id="hof-rows"></div>
+    </div>
+
+    <div style="text-align:center;">
+        <button class="tk-btn btn-hof-close" onclick="closeHOF()">Fermer</button>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════ MENU TRICHE popup ═══════════════════════ -->
+<div id="cheat-popup">
+    <button onclick="saveCheatConfig()">Sauvegarder config</button>
+    <button onclick="loadCheatConfig()">Charger config</button>
+</div>
+
+
+<!-- ═══════════════════════ OVERLAY / MODALS ═══════════════════════ -->
+<div id="overlay">
+    <!-- Modal victoire -->
+    <div class="modal-box" id="modal-win" style="display:none;">
+        <div class="modal-title-bar">Victoire !</div>
+        <div class="modal-body">
+            <p id="modal-win-text"></p>
+            <p style="font-size:12px; color:#444;">Entrez votre pseudo pour le classement :</p>
+            <input type="text" class="modal-input" id="pseudo-input" placeholder="Votre pseudo..." maxlength="20">
+            <div class="modal-btns">
+                <button class="modal-btn modal-ok" onclick="saveScore()">✔ OK</button>
+                <button class="modal-btn modal-cancel" onclick="skipScore()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal aide étendue -->
+    <div class="modal-box" id="modal-help" style="display:none;">
+        <div class="modal-title-bar">Aide Étendue</div>
+        <div class="modal-body">
+            <p id="modal-help-text"></p>
+            <input type="number" class="modal-input" id="help-n-input" min="1" value="2">
+            <div class="modal-btns">
+                <button class="modal-btn modal-ok" onclick="applyHelp()">✔ Révéler</button>
+                <button class="modal-btn modal-cancel" onclick="closeModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal info simple -->
+    <div class="modal-box" id="modal-info" style="display:none;">
+        <div class="modal-title-bar" id="modal-info-title">Information</div>
+        <div class="modal-body">
+            <p id="modal-info-text"></p>
+            <div class="modal-btns">
+                <button class="modal-btn modal-ok" onclick="closeModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal confirm reset -->
+    <div class="modal-box" id="modal-confirm" style="display:none;">
+        <div class="modal-title-bar">Reset Records</div>
+        <div class="modal-body">
+            <p id="modal-confirm-text"></p>
+            <div class="modal-btns">
+                <button class="modal-btn modal-ok" onclick="confirmResetRecords()">Oui</button>
+                <button class="modal-btn modal-cancel" onclick="closeModal()">Non</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    const themes = {
-        Fruits: ["🍎", "🍌", "🍊", "🍇", "🍓", "🥝", "🍑", "🍒"],
-        Sports: ["⚽", "🏀", "🏈", "⚾", "🎾", "🏐", "🏓", "🏸"],
-        Chiffres: ["1", "2", "3", "4", "5", "6", "7", "8"]
-    };
+/* ================================================================
+   DONNÉES DU PROJET (reproduit fidèlement depuis les fichiers .py)
+   ================================================================ */
 
-    let activeTheme = "Fruits";
-    let cards = [];
-    let flipped = [];
-    let matched = 0;
-    let moves = 0;
-    let seconds = 0;
-    let timer;
-
-    function initGame() {
-        const grid = document.getElementById('game-grid');
-        grid.innerHTML = '';
-        cards = [...themes[activeTheme], ...themes[activeTheme]];
-        cards.sort(() => Math.random() - 0.5);
-        
-        matched = 0;
-        moves = 0;
-        seconds = 0;
-        flipped = [];
-        document.getElementById('moves').innerText = "Coups: 0";
-        document.getElementById('timer').innerText = "Temps: 0s";
-        clearInterval(timer);
-        timer = setInterval(() => {
-            seconds++;
-            document.getElementById('timer').innerText = `Temps: ${seconds}s`;
-        }, 1000);
-
-        cards.forEach((val, i) => {
-            const btn = document.createElement('div');
-            btn.className = 'tk-button';
-            btn.innerText = '?';
-            btn.onclick = () => onCardClick(btn, val, i);
-            grid.appendChild(btn);
-        });
+// === card.py ===
+class Card {
+    constructor(value, x = 0, y = 0) {
+        this.value = value;
+        this.is_visible = false;
+        this.is_matched = false;
+        this.is_permanently_visible = false; // mode aide
+        this.x = x;
+        this.y = y;
     }
-
-    function onCardClick(btn, val, index) {
-        if (flipped.length >= 2 || btn.classList.contains('flipped') || btn.classList.contains('matched')) return;
-
-        btn.classList.add('flipped');
-        btn.innerText = val;
-        flipped.push({btn, val});
-
-        if (flipped.length === 2) {
-            moves++;
-            document.getElementById('moves').innerText = `Coups: ${moves}`;
-            checkMatch();
-        }
+    flip() {
+        if (this.is_permanently_visible) return; // cartes d'aide jamais recachées
+        this.is_visible = !this.is_visible;
     }
+    match() {
+        this.is_matched = true;
+        this.is_visible = true;
+    }
+}
 
-    function checkMatch() {
-        const [c1, c2] = flipped;
-        if (c1.val === c2.val) {
-            c1.btn.classList.replace('flipped', 'matched');
-            c2.btn.classList.replace('flipped', 'matched');
-            matched++;
-            flipped = [];
-            if (matched === 8) {
-                clearInterval(timer);
-                alert(`Victoire en ${moves} coups et ${seconds} secondes !`);
-            }
+// === board.py ===
+class Board {
+    constructor(rows = 4, cols = 4, cheat_values = null) {
+        this.rows = rows;
+        this.cols = cols;
+        this.cards = [];
+        this.create_board(cheat_values);
+    }
+    create_board(cheat_values = null) {
+        const total_cards = this.rows * this.cols;
+        const num_pairs = Math.floor(total_cards / 2);
+        let values;
+        if (cheat_values) {
+            // MODE TRICHE : même disposition exacte
+            values = cheat_values;
         } else {
-            setTimeout(() => {
-                c1.btn.classList.remove('flipped');
-                c2.btn.classList.remove('flipped');
-                c1.btn.innerText = '?';
-                c2.btn.innerText = '?';
-                flipped = [];
-            }, 1000);
+            // MODE NORMAL : paires mélangées
+            values = [];
+            for (let i = 1; i <= num_pairs; i++) {
+                values.push(i, i);
+            }
+            // Fisher-Yates shuffle
+            for (let i = values.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [values[i], values[j]] = [values[j], values[i]];
+            }
+        }
+        this.cards = [];
+        for (let row = 0; row < this.rows; row++) {
+            const card_row = [];
+            for (let col = 0; col < this.cols; col++) {
+                const index = row * this.cols + col;
+                card_row.push(new Card(values[index], col, row));
+            }
+            this.cards.push(card_row);
         }
     }
+    get_card(row, col) {
+        if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
+            return this.cards[row][col];
+        }
+        return null;
+    }
+    all_matched() {
+        for (const row of this.cards)
+            for (const card of row)
+                if (!card.is_matched) return false;
+        return true;
+    }
+}
 
-    function revealHelp() {
-        const unflipped = Array.from(document.querySelectorAll('.tk-button:not(.matched):not(.flipped)'));
-        if (unflipped.length < 2) return;
-        const randomCards = unflipped.sort(() => 0.5 - Math.random()).slice(0, 2);
-        
-        randomCards.forEach(c => {
-            const originalVal = cards[Array.from(c.parentNode.children).indexOf(c)];
-            c.classList.add('flipped');
-            c.innerText = originalVal;
-            setTimeout(() => {
-                if (!c.classList.contains('matched')) {
-                    c.classList.remove('flipped');
-                    c.innerText = '?';
-                }
-            }, 1500);
-        });
+// === game.py - thèmes (get_card_display) ===
+const THEMES = {
+    Fruits:  ["🍎","🍌","🍊","🍇","🍓","🥝","🍑","🍒","🥭","🍍","🥥","🍈","🍉","🫐","🍅","🥑","🍋","🍑","🥭","🍊"],
+    Sports:  ["⚽","🏀","🏈","⚾","🎾","🏐","🏓","🏸","🏒","🏑","🎱","🏊","🏃","🚴","🤸","🏋️","🤾","🤺","🏇","🧗"]
+};
+
+function get_card_display(value, theme) {
+    if (theme === "Fruits") {
+        const fruits = THEMES.Fruits;
+        return value <= fruits.length ? fruits[value - 1] : String(value);
+    } else if (theme === "Sports") {
+        const sports = THEMES.Sports;
+        return value <= sports.length ? sports[value - 1] : String(value);
+    }
+    return String(value); // Chiffres
+}
+
+// === database.py (LocalStorage) ===
+const DB_KEY = "jeu_memoire_records";
+function db_get_all() {
+    return JSON.parse(localStorage.getItem(DB_KEY) || "[]");
+}
+function db_save_all(records) {
+    localStorage.setItem(DB_KEY, JSON.stringify(records));
+}
+function db_add_score(pseudo, niveau, theme, temps, coups) {
+    const records = db_get_all();
+    records.push({ pseudo, niveau, theme, temps, coups });
+    db_save_all(records);
+}
+function db_get_top_scores(niveau, theme) {
+    // Reproduit : ORDER BY coups ASC, temps ASC LIMIT 5
+    return db_get_all()
+        .filter(r => r.niveau === niveau && r.theme === theme)
+        .sort((a, b) => a.coups - b.coups || a.temps - b.temps)
+        .slice(0, 5);
+}
+
+/* ================================================================
+   ÉTAT DU JEU
+   ================================================================ */
+let G = {
+    board: null,
+    rows: 4, cols: 4,
+    level: "Normal",
+    theme: "Chiffres",
+    selected_cards: [],  // [{card, row, col}]
+    moves: 0,
+    start_time: null,
+    timer_id: null,
+    sound_enabled: true,
+    cheat_config: null,  // valeurs sauvegardées (mode triche)
+    elapsed: 0,          // durée finale pour victoire
+    // Pour le modal aide
+    hidden_cards_cache: []
+};
+
+/* ================================================================
+   SONS (sounds.py simulé avec AudioContext)
+   ================================================================ */
+function playSound(type) {
+    if (!G.sound_enabled) return;
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        if (type === "click")    { osc.frequency.value = 440; gain.gain.setValueAtTime(0.1, ctx.currentTime); osc.type = "sine"; }
+        if (type === "match")    { osc.frequency.value = 880; gain.gain.setValueAtTime(0.15, ctx.currentTime); osc.type = "triangle"; }
+        if (type === "no_match") { osc.frequency.value = 200; gain.gain.setValueAtTime(0.1, ctx.currentTime); osc.type = "sawtooth"; }
+        if (type === "victory")  { osc.frequency.value = 660; gain.gain.setValueAtTime(0.2, ctx.currentTime); osc.type = "sine"; }
+        osc.start(); osc.stop(ctx.currentTime + 0.18);
+    } catch(e) {}
+}
+
+/* ================================================================
+   MENU PRINCIPAL
+   ================================================================ */
+// Mise à jour de l'info-box quand on change de niveau (update_level)
+document.querySelectorAll('input[name="level"]').forEach(r => {
+    r.addEventListener('change', updateLevelInfo);
+});
+
+function updateLevelInfo() {
+    const level = document.querySelector('input[name="level"]:checked').value;
+    const info = {
+        Facile:   { emoji: "🟢", cards: "12 cartes", grid: "3×4" },
+        Normal:   { emoji: "🔵", cards: "16 cartes", grid: "4×4" },
+        Difficile:{ emoji: "🟠", cards: "30 cartes", grid: "5×6" },
+        Expert:   { emoji: "🔴", cards: "36 cartes", grid: "6×6" }
+    };
+    const d = info[level];
+    document.getElementById('level-info').textContent =
+        `📊 ${level} sélectionné ${d.emoji} - ${d.cards} (${d.grid})`;
+}
+
+function startGame() {
+    const level = document.querySelector('input[name="level"]:checked').value;
+    const theme = document.querySelector('input[name="theme"]:checked').value;
+
+    // level_config (menu.py : start_game)
+    const level_config = {
+        Facile:    [3, 4],
+        Normal:    [4, 4],
+        Difficile: [5, 6],
+        Expert:    [6, 6]
+    };
+    const [rows, cols] = level_config[level];
+
+    G.rows = rows; G.cols = cols;
+    G.level = level; G.theme = theme;
+    G.cheat_config = null;
+
+    initGameScreen();
+    document.getElementById('screen-menu').style.display = 'none';
+    document.getElementById('screen-game').style.display = 'block';
+    document.getElementById('screen-hof').style.display = 'none';
+}
+
+/* ================================================================
+   INITIALISATION DU JEU (game.py : __init__ + create_widgets)
+   ================================================================ */
+function initGameScreen(use_cheat = false) {
+    // Titre fenêtre
+    const txt = `Jeu de Mémoire - ${G.level} (${G.theme})`;
+    document.getElementById('game-titlebar-text').textContent = txt;
+    document.getElementById('game-title').textContent = `JEU DE MÉMOIRE - ${G.level.toUpperCase()}`;
+    document.getElementById('game-theme-label').textContent = `Thème: ${G.theme}`;
+    document.getElementById('records-title').textContent = `RECORDS ${G.level.toUpperCase()}`;
+
+    // Reset stats
+    G.selected_cards = [];
+    G.moves = 0;
+    G.elapsed = 0;
+    document.getElementById('moves-display').textContent = 'Coups: 0';
+    document.getElementById('time-display').textContent = 'Temps: 0s';
+    updateRecordsDisplay();
+
+    // Création du plateau (Board)
+    G.board = new Board(G.rows, G.cols, use_cheat ? G.cheat_config : null);
+
+    // Chronomètre
+    clearInterval(G.timer_id);
+    G.start_time = Date.now();
+    G.timer_id = setInterval(() => {
+        G.elapsed = Math.floor((Date.now() - G.start_time) / 1000);
+        document.getElementById('time-display').textContent = `Temps: ${G.elapsed}s`;
+    }, 1000);
+
+    // Construction de la grille
+    buildGrid();
+}
+
+function buildGrid() {
+    const grid = document.getElementById('game-grid');
+    grid.innerHTML = '';
+    // grid-template-columns selon les colonnes
+    grid.style.gridTemplateColumns = `repeat(${G.cols}, 110px)`;
+
+    for (let row = 0; row < G.rows; row++) {
+        for (let col = 0; col < G.cols; col++) {
+            const btn = document.createElement('div');
+            btn.className = 'tk-card';
+            btn.textContent = '?';
+            btn.id = `card-${row}-${col}`;
+            btn.addEventListener('click', () => cardClicked(row, col));
+            grid.appendChild(btn);
+        }
+    }
+}
+
+/* ================================================================
+   LOGIQUE DES CLICS SUR LES CARTES (game.py : card_clicked)
+   ================================================================ */
+function cardClicked(row, col) {
+    const card = G.board.get_card(row, col);
+
+    // Gardes-fous (identiques à card_clicked dans game.py)
+    if (!card || card.is_matched) return;
+    if (G.selected_cards.length >= 2) return;
+    if (G.selected_cards.some(s => s.card === card)) return;
+    if (card.is_visible && !card.is_permanently_visible) return;
+
+    // Retourner la carte
+    card.flip();
+    const display = get_card_display(card.value, G.theme);
+    const btn = document.getElementById(`card-${row}-${col}`);
+    btn.textContent = display;
+    btn.classList.remove('hint');
+    btn.classList.add('flipped');
+    G.selected_cards.push({ card, row, col });
+    playSound('click');
+
+    // Quand 2 cartes sélectionnées → vérification après 1 seconde
+    if (G.selected_cards.length === 2) {
+        // Bloquer tous les clics pendant 1s
+        document.getElementById('game-grid').style.pointerEvents = 'none';
+        setTimeout(checkMatch, 1000);
+    }
+}
+
+/* ================================================================
+   VÉRIFICATION DE PAIRE (game.py : check_match)
+   ================================================================ */
+function checkMatch() {
+    G.moves++;
+    document.getElementById('moves-display').textContent = `Coups: ${G.moves}`;
+
+    const [s1, s2] = G.selected_cards;
+
+    if (s1.card.value === s2.card.value) {
+        // Paire trouvée → match()
+        s1.card.match();
+        s2.card.match();
+        for (const s of [s1, s2]) {
+            const btn = document.getElementById(`card-${s.row}-${s.col}`);
+            btn.textContent = get_card_display(s.card.value, G.theme);
+            btn.className = 'tk-card matched';
+        }
+        playSound('match');
+
+        if (G.board.all_matched()) {
+            clearInterval(G.timer_id);
+            setTimeout(gameWon, 300);
+        }
+    } else {
+        // Mauvaise paire → recacher
+        s1.card.flip();
+        s2.card.flip();
+        for (const s of [s1, s2]) {
+            const btn = document.getElementById(`card-${s.row}-${s.col}`);
+            if (!s.card.is_permanently_visible) {
+                // Carte normale : remet le "?" gris
+                btn.textContent = '?';
+                btn.className = 'tk-card';
+            } else {
+                // Carte d'aide : reste visible, couleur bleue d'aide
+                btn.className = 'tk-card hint';
+            }
+        }
+        playSound('no_match');
     }
 
-    initGame();
-</script>
+    G.selected_cards = [];
+    document.getElementById('game-grid').style.pointerEvents = 'auto';
+}
 
+/* ================================================================
+   VICTOIRE (game.py : game_won)
+   ================================================================ */
+function gameWon() {
+    playSound('victory');
+    const elapsed = G.elapsed;
+
+    const msg = `🎉 FÉLICITATIONS ! 🎉\n\nNiveau : ${G.level}\nThème : ${G.theme}\nTemps : ${elapsed}s\nCoups : ${G.moves}`;
+    document.getElementById('modal-win-text').textContent = msg;
+    document.getElementById('pseudo-input').value = '';
+
+    showModal('modal-win');
+}
+
+function saveScore() {
+    const pseudo = document.getElementById('pseudo-input').value.trim();
+    if (pseudo) {
+        // database.py : ajouter_score
+        db_add_score(pseudo, G.level, G.theme, G.elapsed, G.moves);
+        updateRecordsDisplay();
+        closeModal();
+        showInfo('Sauvegarde', `Score enregistré ! 🏆\n${pseudo} - ${G.elapsed}s - ${G.moves} coups`);
+    } else {
+        closeModal();
+        returnToMenu();
+    }
+}
+
+function skipScore() {
+    closeModal();
+    returnToMenu();
+}
+
+/* ================================================================
+   RECORDS DISPLAY (game.py : update_records_display)
+   ================================================================ */
+function updateRecordsDisplay() {
+    const top = db_get_top_scores(G.level, G.theme);
+    if (top.length > 0) {
+        document.getElementById('best-moves-display').textContent = `Moins de coups: ${top[0].coups}`;
+        document.getElementById('best-time-display').textContent = `Meilleur temps: ${top[0].temps}s`;
+    } else {
+        document.getElementById('best-moves-display').textContent = 'Moins de coups: --';
+        document.getElementById('best-time-display').textContent = 'Meilleur temps: --';
+    }
+}
+
+/* ================================================================
+   RECOMMENCER (game.py : restart_game)
+   ================================================================ */
+function restartGame(use_cheat = false) {
+    clearInterval(G.timer_id);
+    initGameScreen(use_cheat);
+}
+
+/* ================================================================
+   RESET RECORDS (game.py : reset_records)
+   ================================================================ */
+function resetRecords() {
+    document.getElementById('modal-confirm-text').textContent =
+        `Effacer les records du niveau ${G.level} ?`;
+    showModal('modal-confirm');
+}
+function confirmResetRecords() {
+    // Supprime uniquement les records du niveau+thème actuel
+    const all = db_get_all().filter(r => !(r.niveau === G.level && r.theme === G.theme));
+    db_save_all(all);
+    updateRecordsDisplay();
+    closeModal();
+    showInfo('Records effacés', `Les records du niveau ${G.level} ont été remis à zéro !`);
+}
+
+/* ================================================================
+   RETOUR AU MENU (game.py : return_to_menu)
+   ================================================================ */
+function returnToMenu() {
+    clearInterval(G.timer_id);
+    document.getElementById('screen-game').style.display = 'none';
+    document.getElementById('screen-menu').style.display = 'block';
+    document.getElementById('screen-hof').style.display = 'none';
+    closeModal();
+}
+
+/* ================================================================
+   AIDE ÉTENDUE (game.py : activate_help)
+   ================================================================ */
+function activateHelp() {
+    // Lister toutes les cartes cachées non matchées et non déjà en aide
+    const hidden = [];
+    for (let row = 0; row < G.rows; row++) {
+        for (let col = 0; col < G.cols; col++) {
+            const card = G.board.get_card(row, col);
+            if (!card.is_matched && !card.is_permanently_visible) {
+                hidden.push({ row, col, card });
+            }
+        }
+    }
+    if (hidden.length === 0) {
+        showInfo('Aide', 'Toutes les cartes possibles sont déjà visibles ou trouvées.');
+        return;
+    }
+    G.hidden_cards_cache = hidden;
+    const max_n = hidden.length;
+    document.getElementById('modal-help-text').textContent =
+        `Combien de cartes voulez-vous révéler ? (1 à ${max_n})`;
+    const inp = document.getElementById('help-n-input');
+    inp.max = max_n;
+    inp.value = Math.min(2, max_n);
+    showModal('modal-help');
+}
+
+function applyHelp() {
+    let n = parseInt(document.getElementById('help-n-input').value);
+    const hidden = G.hidden_cards_cache;
+    if (!n || n < 1) n = 1;
+    if (n > hidden.length) n = hidden.length;
+
+    // random.sample (sans doublons)
+    const shuffled = [...hidden].sort(() => Math.random() - 0.5);
+    const chosen = shuffled.slice(0, n);
+
+    for (const { row, col, card } of chosen) {
+        card.is_permanently_visible = true;
+        card.is_visible = true;
+        const btn = document.getElementById(`card-${row}-${col}`);
+        btn.textContent = get_card_display(card.value, G.theme);
+        btn.className = 'tk-card hint';
+    }
+    closeModal();
+}
+
+/* ================================================================
+   SONS (game.py : toggle_sound)
+   ================================================================ */
+function toggleSound() {
+    G.sound_enabled = !G.sound_enabled;
+    const btn = document.getElementById('sound-btn');
+    if (G.sound_enabled) {
+        btn.textContent = '🔊 Sons ON';
+        btn.className = 'tk-btn btn-sound-on';
+    } else {
+        btn.textContent = '🔇 Sons OFF';
+        btn.className = 'tk-btn btn-sound-off';
+    }
+}
+
+/* ================================================================
+   MENU TRICHE SECRET (game.py : open_cheat_menu, save_config, load_config)
+   ================================================================ */
+function openCheatMenu(event) {
+    const popup = document.getElementById('cheat-popup');
+    popup.style.display = 'block';
+    popup.style.left = (event.clientX) + 'px';
+    popup.style.top  = (event.clientY) + 'px';
+    event.stopPropagation();
+}
+document.addEventListener('click', () => {
+    document.getElementById('cheat-popup').style.display = 'none';
+});
+
+function saveCheatConfig() {
+    // Parcourt toute la grille et enregistre les valeurs dans l'ordre (cheat_config.json simulé)
+    const values = [];
+    for (let row = 0; row < G.rows; row++)
+        for (let col = 0; col < G.cols; col++)
+            values.push(G.board.get_card(row, col).value);
+    G.cheat_config = values;
+    // Sauvegarde aussi en localStorage (équivalent du JSON)
+    localStorage.setItem('cheat_config', JSON.stringify({
+        rows: G.rows, cols: G.cols, values
+    }));
+    console.log('Config sauvegardée secrètement.');
+    document.getElementById('cheat-popup').style.display = 'none';
+}
+
+function loadCheatConfig() {
+    const raw = localStorage.getItem('cheat_config');
+    if (raw) {
+        const data = JSON.parse(raw);
+        if (data.rows === G.rows && data.cols === G.cols) {
+            G.cheat_config = data.values;
+            restartGame(true); // use_cheat=True
+            console.log('Config chargée secrètement et partie relancée.');
+        } else {
+            console.log('La config ne correspond pas aux dimensions de ce niveau.');
+        }
+    } else {
+        console.log('Aucune configuration sauvegardée.');
+    }
+    document.getElementById('cheat-popup').style.display = 'none';
+}
+
+/* ================================================================
+   HALL OF FAME (menu.py : show_records)
+   ================================================================ */
+function showHOF() {
+    document.getElementById('screen-menu').style.display = 'none';
+    document.getElementById('screen-game').style.display = 'none';
+    document.getElementById('screen-hof').style.display = 'block';
+    // Sync filtres sur le niveau/thème actuellement sélectionné dans le menu
+    const selLevel = document.querySelector('input[name="level"]:checked').value;
+    const selTheme = document.querySelector('input[name="theme"]:checked').value;
+    document.getElementById('hof-level').value = selLevel;
+    document.getElementById('hof-theme').value = selTheme;
+    refreshHOF();
+}
+
+function refreshHOF() {
+    const niveau = document.getElementById('hof-level').value;
+    const theme  = document.getElementById('hof-theme').value;
+    const scores = db_get_top_scores(niveau, theme);
+    const container = document.getElementById('hof-rows');
+    container.innerHTML = '';
+
+    if (scores.length === 0) {
+        container.innerHTML = `<div class="hof-empty">Pas encore de record<br>pour cette catégorie !</div>`;
+        return;
+    }
+    for (const s of scores) {
+        const row = document.createElement('div');
+        row.className = 'hof-row';
+        row.innerHTML = `
+            <span class="hof-col-name">${s.pseudo}</span>
+            <span class="hof-col-time">${s.temps}s</span>
+            <span class="hof-col-moves">${s.coups}</span>`;
+        container.appendChild(row);
+    }
+}
+
+function closeHOF() {
+    document.getElementById('screen-hof').style.display = 'none';
+    document.getElementById('screen-menu').style.display = 'block';
+}
+
+/* ================================================================
+   MODALS HELPERS
+   ================================================================ */
+function showModal(id) {
+    document.querySelectorAll('.modal-box').forEach(m => m.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.getElementById('overlay').classList.add('active');
+}
+function closeModal() {
+    document.getElementById('overlay').classList.remove('active');
+    document.querySelectorAll('.modal-box').forEach(m => m.style.display = 'none');
+}
+function showInfo(title, text) {
+    document.getElementById('modal-info-title').textContent = title;
+    document.getElementById('modal-info-text').textContent = text;
+    showModal('modal-info');
+    // Le OK du modal-info redirige vers le menu si la partie est terminée
+    document.querySelector('#modal-info .modal-ok').onclick = () => {
+        closeModal();
+        // Si le modal-info vient après une victoire, retour menu
+        if (title === 'Sauvegarde') returnToMenu();
+    };
+}
+
+// Fermer le cheat popup aussi sur Escape
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeModal();
+        document.getElementById('cheat-popup').style.display = 'none';
+    }
+});
+</script>
 </body>
 </html>
